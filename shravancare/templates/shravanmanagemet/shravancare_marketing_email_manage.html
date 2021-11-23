@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Marketing</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Maketing Email</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="#" method="POST" name="state-form" enctype="multipart/form-data">
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Maketing Emails</h3>
+
+          
+          </div>
+  
+           
+           
+            <div class="card-body">
+                <div class="row">
+                   
+              <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio1" id="send-existing" checked>
+                          <label class="form-check-label">Send This To An Existing Customer</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio1" id="send-new">
+                          <label class="form-check-label">Send This To New Person</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="radio1" id="send-all">
+                          <label class="form-check-label">Send This To All</label>
+                        </div>
+                      </div>
+         </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+                    <label for="customerName">Email Type</label>
+                    <select class="form-control custom-select" name="email-type" id="email-type" required="">
+          <option value="1">Welcome Email</option>
+<option value="2">Marketing Email</option>
+          </select>
+                  </div>
+        </div>  
+ </div>
+ <div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group" id="cust-search" >
+                    <label for="customerName">Customer</label>
+                    <div class="test" autocomplete="false">
+                    <input type="text" class="form-control" name="cust-search-field" autocomplete="off" id="cust-search-field" placeholder="Search Customer">
+                    </div>
+                  </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group" id="cust-details-field">
+                    <label for="customerName">Customer Details</label>
+                    <input type="text" class="form-control" name="cust-details" id="cust-details" placeholder="Customer Details" readonly>
+                  </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-xs-6">
+        <div class="form-group" id="new-custname-field" style="display:none;">
+            <label for="customerName">Full Name</label>
+        <input type="text" class="form-control" name="new-custname" id="new-custname" placeholder="Full Name" >
+        </div>
+        </div> 
+        <div class="col-lg-6 col-md-6 col-xs-6">
+        <div class="form-group" id="new-custemail-field" style="display:none;">
+            <label for="customerName">Email Id</label>
+        <input type="email" class="form-control" name="new-custemail" id="new-custemail" placeholder="Email" >
+        </div>
+        </div> 
+        <div class="col-lg-6 col-md-6 col-xs-6">
+        <div class="form-group" id="new-cust-file" style="display:none;">
+            <label for="customerName">Import Excel Data</label>
+        <input type="file" name="file-upload" id="file-upload" >
+        </div>
+        </div> 
+ </div>
+ 
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" name="savebutton" class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                <button type="button" class="btn btn-block btn-secondary" onclick="location.href='sharavancare_marketing_email_grid.html';">Exit</button>
+              </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+<script>
+    $(document).ready(function() {
+    $("input[name='radio1']").click(function() {
+     if ($("#send-new").is(":checked")) {
+       $("#cust-search").hide();
+       $("#cust-details-field").hide();
+       $("#new-custname-field").show();
+       $("#new-custemail-field").show();
+       
+     } 
+     else if ($("#send-all").is(":checked")) {
+        $("#cust-search").hide();
+       $("#cust-details-field").hide();
+       $("#new-custname-field").hide();
+       $("#new-custemail-field").hide(); 
+        $("#new-cust-file").show(); 
+       
+     }
+     else{
+        $("#cust-search").hide();
+       $("#cust-details-field").hide();
+       $("#new-custname-field").hide();
+       $("#new-custemail-field").hide(); 
+        $("#new-cust-file").hide();
+        $("#cust-search").show(); 
+        $("#cust-details-field").show();
+     }
+   });
+});
+
+</script>
+<!--excel-sheet-conversion-script start -->
+<!--<script>
+    function Upload() {
+        //Reference the FileUpload element.
+        var fileUpload = document.getElementById("file-upload");
+ 
+        //Validate whether File is valid Excel file.
+        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.xls|.xlsx)$/;
+        if (regex.test(fileUpload.value.toLowerCase())) {
+            if (typeof (FileReader) != "undefined") {
+                var reader = new FileReader();
+ 
+                //For Browsers other than IE.
+                if (reader.readAsBinaryString) {
+                    reader.onload = function (e) {
+                        ProcessExcel(e.target.result);
+                    };
+                    reader.readAsBinaryString(fileUpload.files[0]);
+                } else {
+                    //For IE Browser.
+                    reader.onload = function (e) {
+                        var data = "";
+                        var bytes = new Uint8Array(e.target.result);
+                        for (var i = 0; i < bytes.byteLength; i++) {
+                            data += String.fromCharCode(bytes[i]);
+                        }
+                        ProcessExcel(data);
+                    };
+                    reader.readAsArrayBuffer(fileUpload.files[0]);
+                }
+            } else {
+                alert("This browser does not support HTML5.");
+            }
+        } else {
+            alert("Please upload a valid Excel file.");
+        }
+    };
+    function ProcessExcel(data) {
+        //Read the Excel File data.
+        var workbook = XLSX.read(data, {
+            type: 'binary'
+        });
+ 
+        //Fetch the name of First Sheet.
+        var firstSheet = workbook.SheetNames[0];
+ 
+        //Read all rows from First Sheet into an JSON array.
+        var excelRows = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[firstSheet]);
+ 
+  var emailtype=document.getElementById("templatetype").value;
+
+/*$.ajax({
+            type: 'post',
+            url: 'marketingemailkafunct.html',
+            data: {'emailtype':emailtype,'exceldata':JSON.stringify(excelRows)},
+            success: function (datamain) {
+                
+             
+              alert(datamain);
+                    
+            window.open('legalo_marketing_email_grid.html', '_self');        
+                
+              
+            }
+          }); */
+    };
+
+</script>-->
+	</body>
+</html>

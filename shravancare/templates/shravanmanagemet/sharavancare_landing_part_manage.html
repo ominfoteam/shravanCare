@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+   <style>
+       .ck-editor__editable_inline {
+    min-height: 300px;
+}
+   </style>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Landing Part</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="shravancare_dashboard_frame.html">Home</a></li>
+              <li class="breadcrumb-item active">Landing Part</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="#" method="POST"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Landing Part</h3>
+
+          
+          </div>
+  
+        
+            <div class="card-body">
+                <div class="row">
+              <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+         
+			  <div class="profile-header-img">
+				   <img src="{% if slider %}/static{{slider.sliderimage}}{% else %}{% static 'img/Photos-new-icon.png' %}{% endif %}" id="changedp" alt="Profile Picture"  style="width: 100px;">
+				</div>
+                <p>
+				Choose Landing Image: <input type="file" name="upFile23" id="upFile23" {{view}} {% if addwalah %}required{% endif %}>
+				</p>
+        </div>
+    </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+   <div class="col-lg-8 col-md-8 col-xs-8">
+         <div class="form-group">
+                    <label for="customerName">Landing Image Text</label>
+                    <textarea class="form-control" name="landing-text" {{view}} id="landing-text" rows="5">{{slider.imagetext}}</textarea>
+        </div>  
+ </div>
+ </div>
+ <div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+                    <label for="customerName">Position</label>
+                    <input type="number" class="form-control" {{view}} name="positionmain" id="positionmain" min="0" placeholder="Position" required  value="{{slider.position}}">
+                  </div>
+        </div>   
+ </div>
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" name="savebutton" {{view}} class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                <a href="{% url 'gridSlider' %}"><button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+               </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+<script>
+    ClassicEditor
+    .create( document.querySelector( '#landing-text' ), {
+        codeBlock: {
+          
+            languages: [
+                { language: 'css', label: 'CSS' },
+                { language: 'html', label: 'HTML' }
+            ]
+        }
+    }{% if view %}, isReadOnly {% endif %} );
+    
+    function readURL(input) {
+    console.log("hit");
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#changedp').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#upFile23").change(function(){
+    readURL(this);
+});
+</script>
+	</body>
+</html>

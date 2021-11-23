@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Zone Form</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Zone Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="#" method="POST" name="zone-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Zone</h3>
+
+          
+          </div>
+  
+           
+           
+            <div class="card-body">
+              
+ <div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+                    <label for="customerName">Zone Name</label>
+                    <input type="text" class="form-control" name="zonename" {{view}} id="zonename" placeholder="Zone Name" required value="{{zonedetails.zone_name}}" >
+                  </div>
+        </div>  
+ </div>
+ 
+             
+ <div class="row">
+  <div class="col-lg-6 col-md-6 col-xs-6">
+        <div class="form-group">
+                   <label for="customerName">Zone Description</label>
+                   <textarea class="form-control" name="zonedescrip" {{view}} id="zonedescrip" placeholder="Zone Name" required>{{zonedetails.zone_describe}}</textarea>
+                   
+                 </div>
+       </div>  
+</div>
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" name="savebutton" {{view}} class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                <a href="{% url 'gridZone' %}"><button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+              </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+  <script>
+    $("#country").change(function () {
+        const url = "{% url 'load_state' %}"
+        const countryId = $(this).val();  
+  
+        $.ajax({                      
+            url: url,                   
+            data: {
+                'country_id': countryId   
+            },
+            success: function (data) {  
+                $("#state").html(data); 
+              
+  
+            }
+        });
+  
+    });
+    </script>
+	</body>
+</html>

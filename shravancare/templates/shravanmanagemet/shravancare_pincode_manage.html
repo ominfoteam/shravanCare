@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Pincode Form</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Pincode Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="#" method="POST" name="pincode-form" enctype="multipart/form-data">
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Pincode</h3>
+
+          
+          </div>
+  
+           
+           
+            <div class="card-body">
+                <div class="row">
+                   
+              <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                <label for="inputStatus">Country</label>
+                <select class="form-control custom-select" {{view}} name="country" id="country" required>
+           <option value>SELECT COUNTRY</option>         
+           {% for countries in country %}        
+           <option value="{{countries.id}}" {% if countries.id == pincodedetail.city.state.country.id %} selected="selected" {% endif %} >{{countries.country_name}}</option>
+           {% endfor %}
+          </select>
+              </div>
+         </div>
+         <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                <label for="inputStatus">State</label>
+                <select class="form-control custom-select" {{view}} name="state" id="state" required>
+            
+           {% if state %}
+           {% for states in state %}        
+           <option value="{{states.id}}" {% if states.id == pincodedetail.city.state.id %} selected="selected" {% endif %} >{{states.state_name}}</option>
+           {% endfor %}
+          
+           {% else%}
+                  <option value>SELECT COUNTRY</option>         
+         {% endif %}
+          </select>
+              </div>
+         </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+     <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                <label for="inputStatus">City</label>
+                <select class="form-control custom-select" {{view}} name="city" id="city" required>
+                  {% if city %}
+                  {% for cities in city %}        
+                  <option value="{{cities.id}}" {% if cities.id == pincodedetail.city.id %} selected="selected" {% endif %} >{{cities.city_name}}</option>
+                  {% endfor %}
+                 </select>
+                  {% else%}
+                         <option value>SELECT COUNTRY</option>         
+                {% endif %}
+          </select>
+              </div>
+         </div> 
+         <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                <label for="inputStatus">Zone</label>
+                <select class="form-control custom-select" {{view}} name="zoneid" id="zoneid" required>
+                 
+           {% for zone in zonemain %}        
+           <option value="{{zone.id}}" {% if zone.id == pincodedetail.zone.id %} selected="selected" {% endif %} >{{zone.zone_name}}</option>
+           {% endfor %}
+          </select>
+              </div>
+         </div>             
+          
+         
+       
+        	
+              
+ </div>
+ 
+ <div class="row">
+  <div class="col-lg-6 col-md-6 col-xs-6">
+    <div class="form-group">
+               <label for="customerName">Pin Code</label>
+               <input type="text" class="form-control" name="pincode" {{view}} id="pincode" placeholder="Pin Code" onkeypress="return isNumber(event)" maxlength="6" required value="{{pincodedetail.pincode_no}}" >
+             </div>
+   </div>     
+   </div>
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" {{view}} name="savebutton" class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                <a href="{% url 'gridPincode' %}"><button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+              </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+
+  
+<script>
+  $("#country").change(function () {
+      const url = "{% url 'load_state' %}"
+      const countryId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'country_id': countryId   
+          },
+          success: function (data) {  
+              $("#state").html(data); 
+              var selectcity = $('#city');
+              selectcity.empty().append('<option value="">---Select State---</option>');
+
+          }
+      });
+
+  });
+
+
+  $("#state").change(function () {
+      const url = "{% url 'load_city' %}"
+      const stateId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'state_id': stateId   
+          },
+          success: function (data) {  
+              $("#city").html(data); 
+                 }
+      });
+
+  });
+  </script>
+   <script>
+        function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+
+  return true;
+}
+</script>
+	</body>
+</html>

@@ -1,0 +1,639 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include "shravanmanagemet/header.html" %}
+   <style>
+       .table-bordered td, .table-bordered th {
+    border: none;
+}
+.client-details-name{
+    color:#007bff;
+    font-size: 16px;
+    font-weight: 700;
+    padding-left:5px;
+}
+.elder-details-name{
+    color:#007bff;
+    font-size: 16px;
+    font-weight: 700;
+    padding-top:15px;
+}
+.changeonhover:hover {
+    cursor: pointer;
+    color: #0069d9;
+}
+   </style>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{% static 'img/Shravancare-Square-Logo.png' %}" alt="AdminLTELogo" height="100" width="100">
+  </div>
+
+ {% include "shravanmanagemet/navbar.html" %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!--<div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard v1</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+               Welcome, {{request.session.name}} <div class="card-tools"><i class="fas fa-calendar-week"></i> {% now "d M Y" %} </div>
+              </div>
+              <!-- /.card-header -->
+            
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+  
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+      
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+              <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Sales Request</h3>
+             
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
+            </div>
+           
+            <div class="card-body">
+               <table id="sales-request-table" class="table table-bordered table-striped">
+                   <thead>
+
+                       <th>Ticket Number</th>
+    <th>Client Name</th>
+    <th>Status</th>
+                       <th>Action</th>
+                   </thead>
+                   <tbody>
+                    {% for salesreq in salesreqs %}
+                    <tr><td>{{salesreq.ticketno}}</td>
+                    <td>{{salesreq.custname}}</td>
+                    <td>{{salesreq.querystatus}}</td>
+                    <td> <div class="btn-group">
+                       
+                         <button type="button" class="btn btn-bg btn-primary" onclick="window.open('{% url 'viewSalesRequest' salesreq.id %}','_blank');"><i class="fa fa-eye" ></i></button>
+                     
+                         <button type="button" class="btn  btn-warning" onclick="window.open('{% url 'editSalesRequest' salesreq.id %}','_blank');"><i class="fa fa-edit"  title="Edit" ></i></button>
+                 
+                         </div></td>
+                       </tr>
+                       {% endfor %}
+                   </tbody>
+                   </table>
+              
+            </div>
+            
+          </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-xs-6">
+             <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Customer Complaints</h3>
+             
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
+            </div>
+           
+            <div class="card-body">
+               <table id="customer-complaint-table" class="table table-bordered table-striped">
+                   <thead>
+                    <th>Ticket Number</th>
+                    <th>Client Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                   </thead>
+                   <tbody>
+                    {% for custreq in custreqs %}
+  <tr><td>{{custreq.ticketno}}</td>
+    <td>{{custreq.custname}}</td>
+    <td>{{custreq.querystatus}}</td>
+    <td> <div class="btn-group">
+                       
+                         <button type="button" class="btn btn-bg btn-primary" onclick="window.open('{% url 'viewCustomerRequest' custreq.id %}','_blank');"><i class="fa fa-eye" ></i></button>
+                     
+                         <button type="button" class="btn  btn-warning" onclick="window.open('{% url 'editCustomerRequest' custreq.id %}','_blank');"><i class="fa fa-edit"  title="Edit" ></i></button>
+                 
+                         </div>
+                     
+                         
+                 
+                         </td>
+                       </tr>
+                       {% endfor %}
+                   </tbody>
+                   </table>
+              
+            </div>
+            
+          </div> 
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-lg-6 col-md-6 col-xs-6">
+              <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Pending Bills</h3>
+             
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
+            </div>
+           
+            <div class="card-body">
+               <table id="pending-bills-table" class="table table-bordered table-striped">
+                   <thead>
+                    <tr>
+                       
+                      <th>Invoice Number</th>
+                      <th>Invoice Date</th>
+                      <th>Invoice Type</th>
+                      <th>Customer Name</th>
+                     
+                      <th>Action</th>
+                    </tr>
+                </thead>
+<tbody>
+
+
+{% for inv in invoice %}
+<tr>
+  
+  <th>{{inv.invoiceno}}</th>
+  <th>{{inv.invdate}}</th>
+  <th>{{inv.plantype}}</th>
+  <th>{{inv.custname}}</th>
+  
+  <td> <div class="btn-group">
+                       
+                         <button type="button" class="btn btn-bg btn-primary" onclick="window.open('{% url 'viewCustInvoice' inv.id %}', '_blank');"><i class="fa fa-eye"></i></button>
+                         </td>
+                       </tr>
+                     {% endfor %}
+                   </tbody>
+                   </table>
+              
+            </div>
+            
+          </div>
+          </div>
+           <div class="col-lg-6 col-md-6 col-xs-6">
+              <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Today's Visits</h3>
+             
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+
+            </div>
+           
+            <div class="card-body">
+               <table id="today-visit-table" class="table table-bordered table-striped">
+                   <thead>
+                       <th>Client Name</th>
+                       <th>iCare Partner Name</th>
+                       <th>Slot Name</th>
+                       <th>Action</th>
+                   </thead>
+                   <tbody>
+                     {% for vis in todaysvis %}
+                       <tr>
+                           <td data-toggle="modal" data-target="#client-details-modal" class="changeonhover">{{visd.cust_id.user_profile.name}}</td>
+                           <td>{{visd.icare_id.user_profile.name}}</td>
+                           <td>{{vis.slot_id.slotname}}</td>
+                            <td>
+                              cl-status
+                              cl-icare
+                              cl-slot
+                              cl-parent-address
+                              cl-parent-name
+                              cl-name
+
+                         <button type="button" class="btn btn-bg btn-primary"  data-toggle="modal" data-target="#today-visit-modal" data-visstatus="{{vis.visitstatus}}" data-icarename="{{vis.icare_id.user_profile.name}}" data-slotname="{{vis.slot_id.slotname}}" data-parentaddr="{{vis.custparentaddr}}" data-parentname="{{vis.custparentname}}" data-clientname="{{visd.cust_id.user_profile.name}}"><i class="fa fa-eye"></i></button>
+                         </td>
+                       </tr>
+                    {% endfor %}
+                   </tbody>
+                   </table>
+              
+            </div>
+            
+          </div>
+          </div>
+      </div>
+        
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  
+
+  <!-- Control Sidebar -->
+  <!--<aside class="control-sidebar control-sidebar-dark">
+   
+  </aside>-->
+ 
+  {% include "shravanmanagemet/copyright.html" %}
+</div>
+ {% include "shravanmanagemet/footer.html" %}
+   <!-- sales-request-modal-->
+   <div class="modal fade" id="sales-request-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Sales Request</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-lg-12 col-md-12 col-xs-12">
+                      <table class="table table-striped">
+                          <tbody>
+                              <tr>
+                                  <th>Name:</th>
+                                  <td id="sales-request-name">Saurabh Gaikwad</td>
+                              </tr>
+                              <tr>
+                                  <th>Email-id:</th>
+                                  <td id="sales-request-email">saurabh.gaikwad@ominformatics.in</td>
+                              </tr>
+                              <tr>
+                                  <th>Mobile Number</th>
+                                  <td id="sales-request-mob">+91 9727695253</td>
+                              </tr>
+                              <tr>
+                                  <th>Message</th>
+                                  <td id="sales-request-msg">Test Message</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- update sales-request-modal-->
+      <div class="modal fade" id="update-sales-request-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Update Sales Request</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST">
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-lg-12 col-md-12 col-xs-12">
+                      <div class="form-group">
+                <label for="inputStatus">Change status of sales request</label>
+                <select class="form-control custom-select" name="status" id="status" required="">
+           <option value="">SELECT OPTION</option>         
+          <option value="1">In Progress</option>
+          <option value="2">Close</option>
+          <option value="3">Success</option>
+          </select>
+              </div>
+              <div class="form-group">
+                  <label>Previous Reasons: <span id="previous-reasons"></span></label>
+              </div>
+              <div class="form-group">
+                  <label>Comment</label>
+                  <textarea class="form-control" name="usercmnt" id="usercmnt" required="" placeholder="Write Your Comment"></textarea>
+              </div>
+                  </div>
+              </div>
+            </div>
+            </form>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary" name="updateConvo" id="updateConvo" value="Submit">
+            </div>
+          </div>
+          </form>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- today's visit modal-->
+      <div class="modal fade" id="today-visit-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Today's Visit</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-lg-12 col-md-12 col-xs-12">
+                      <table class="table table-striped">
+                          <tbody>
+                              <tr>
+                                  <th>Client Name:</th>
+                                  <td id="cl-name">Nigel George</td>
+                              </tr>
+                              <tr>
+                                  <th>Parent Name:</th>
+                                  <td id="cl-parent-name">John Wick, Ana Wick</td>
+                              </tr>
+                              <tr>
+                                  <th>Address:</th>
+                                  <td id="cl-parent-address">ABC street, Mumbai, 400005</td>
+                              </tr>
+                              <tr>
+                                  <th>Slot:</th>
+                                  <td id="cl-slot">Slot1</td>
+                              </tr>
+                              <tr>
+                                  <th>iCare Partner Name:</th>
+                                  <td id="cl-icare">Harhal Wagh</td>
+                              </tr>
+                              <tr>
+                                  <th>Visit Count:</th>
+                                  <td id="cl-visit-count">5/10</td>
+                              </tr>
+                              <tr>
+                                  <th>Status:</th>
+                                  <td id="cl-status">Visit Pending</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+            </div>
+          <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+<!-- Client Modal -->
+<div class="modal fade" id="client-details-modal">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title w-100 text-center">Client Details</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="card card-primary card-outline">
+                          <div class="card-body box-profile" style="padding: 0.8rem;">
+                              <h5 class="client-details-name">Client Details</h5>
+                              <table class="table table-borderless table-sm">
+                                  <tbody>
+                                      <tr>
+                                          <td>Name:</td>
+                                          <td>Nigel George</td>
+                                      </tr>
+                                      <tr>
+                                          <td>Email:</td>
+                                          <td>nigel@gmail.com</td>
+                                      </tr>
+                                      <tr>
+                                          <td>Mobile:</td>
+                                          <td>+91 1234567890</td>
+                                      </tr>
+                                      <tr>
+                                          <td>Address:</td>
+                                          <td>ABC Apartment, ABC street, Mumbai , 400008, India</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                              <h5 class="elder-details-name">Elder Details</h5>
+                              <table class="table table-borderless table-sm">
+                                  <tbody>
+                                      <tr>
+                                          <td>Name:</td>
+                                          <td>Mr. John Wick <span id="elder-age">(62 yrs)</span><br> Mrs. Ana Wick <span id="elder-age">(58 yrs)</span></td>
+                                      </tr>
+                                      <tr>
+                                          <td>Contact:</td>
+                                          <td>+91 1234567890</td>
+                                      </tr>
+                                      <tr>
+                                          <td>Address:</td>
+                                          <td>ABC Apartment, ABC street, Mumbai , 400008, India</td>
+                                      </tr>
+                                  </tbody>
+                            </table>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card">
+                      <div class="card-header p-2">
+                          <ul class="nav nav-pills">
+                              <li class="nav-item"><a class="nav-link active" href="#visit" data-toggle="tab">Visits</a></li>
+                              <li class="nav-item"><a class="nav-link" href="#invoices" data-toggle="tab">Invoices</a></li>
+                          </ul>
+                      </div>
+                      <div class="card-body">
+                          <div class="tab-content">
+                              <div class="tab-pane active" id="visit">
+                                  <div class="table-responsive">
+                                    <table id="visits-table" class="table table-bordered table-striped">
+                                        <thead>
+                                            <th>Visit Date</th>
+                                            <th>Visit Time</th>
+                                            <th>iCare Partner Name</th>
+                                            <th>Status</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>20/08/2021</td>
+                                                <td>12.00 PM</td>
+                                                <td>Harshal Wagh</td>
+                                                <td>Active</td>
+                                            </tr>
+                                            <tr>
+                                                <td>19/08/2021</td>
+                                                <td>3.00 PM</td>
+                                                <td>Harshal Wagh</td>
+                                                <td>Active</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>  
+                                  </div>
+                              </div>
+                              <div class="tab-pane" id="invoices">
+                                  <div class="table-responsive">
+                                      <table id="invoice-table" class="table table-bordered table-striped">
+                                          <thead>
+                                              <th>Date</th>
+                                              <th>Invoice No</th>
+                                              <th>Amount</th>
+                                              <th>Status</th>
+                                          </thead>
+                                          <tbody>
+                                              <tr>
+                                                  <td>19/08/2021</td>
+                                                  <td>SC5645</td>
+                                                  <td>₹1,47,250</td>
+                                                  <td>Successful</td>
+                                              </tr>
+                                              <tr>
+                                                  <td>20/08/2021</td>
+                                                  <td>SC5655</td>
+                                                  <td>₹85,050</td>
+                                                  <td>Pending</td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <!--<div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>-->
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+<script>
+ 
+   
+
+  $('#today-visit-modal').on('show.bs.modal', function(e1) {
+  
+    $('#cl-icare').html($('#todaysvisitdetail').attr('data-icarename'));
+    $('#cl-parent-address').html($('#todaysvisitdetail').attr('data-parentaddr'));
+    $('#cl-parent-name').html($('#todaysvisitdetail').attr('data-parentname'));
+    $('#cl-name').html($('#todaysvisitdetail').attr('data-clientname'));
+    $('#cl-status').html($('#todaysvisitdetail').attr('data-visstatus'));
+    $('#cl-slot').html($('#todaysvisitdetail').attr('data-slotname'));
+ 
+  
+                         });
+
+
+
+</script>
+
+
+<script>
+     $('#sales-request-table').DataTable({
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    $('#customer-complaint-table').DataTable({
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    $('#pending-bills-table').DataTable({
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    $('#today-visit-table').DataTable({
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    $('#visits-table').DataTable({
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": false,
+      "responsive": true,
+    });
+    $('#invoice-table').DataTable({
+      "paging": false,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": false,
+      "responsive": true,
+    });
+</script>
+
+</body>
+</html>

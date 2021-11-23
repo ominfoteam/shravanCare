@@ -1,0 +1,558 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Shravancare</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/website-style.css' %}">
+   <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+  <!--<link rel="stylesheet" href="{% static 'css/slick.css">-->
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{% static 'plugins/select2/css/select2.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" rel="stylesheet" media="screen">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<style>
+    input#files-count {
+    border: 0;
+    text-align:center;
+    background:#ECF6FF;
+}
+.select2-container--default .select2-selection--multiple{
+    border-radius:0;
+}
+.span-label{
+  width:62%;
+  float:right;  
+}
+@media only screen and (max-width: 768px) {
+   .span-label{
+  float:unset;  
+} 
+}
+</style>
+</head>
+<body>
+    <nav class="container navbar navbar-expand-sm">
+  <a href="index.html" ><img src="{% static 'img/Shravancare-Square-Logo.png' %}" class="logo" alt="shravancare-logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-2" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar-list-2">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#what-we-do">What We Do</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#pricing">Plans & Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#testimonial">Testimonials</a>
+      </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#about">About Us</a>
+      </li>
+       <!--<li class="nav-item">
+        <a class="nav-link" href="#vision-mission">Vision & Mission</a>
+      </li>-->
+      <li class="nav-item">
+        <a class="nav-link" href="#why-us">Why Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#icare-partner">Partners</a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li class="only-width nav-item dropdown" id="user-dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#00529C;">
+        {{request.session.name}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="my-item dropdown-item" href="myProfile" >Update Profile</a>
+          <a class="my-item dropdown-item" href="#" data-toggle="modal" data-target="#transaction-modal">Past Transaction</a>
+          <a class="my-item dropdown-item" href="#" data-toggle="modal" data-target="#visits-modal">Visits</a>
+            <a class="my-item dropdown-item" href="logout_frontend" id="logout">Logout</a>
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+
+    {% if request.user.is_authenticated %}
+    {% else %}
+    <div class="login-register" id="login-register">
+  <a  href="" data-toggle="modal" data-target="#login-modal" class="blue-text">Login</a> | <a href="" data-toggle="modal" data-target="#registration-modal" class="blue-text">Register</a>
+  </div>{% endif %}
+  </div>
+</nav>
+   <section class="select-icare">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h2 class="select-icare-heading aos-init aos-animate" data-aos="fade-right" data-aos-duration="2000">Select iCare Partner</h2>
+                </div>
+            </div>
+        </div>
+        <div class="mr-row row">
+            <div class="col-md-12">
+                <h6 class="set-appointment">Set Appintment</h6>
+                
+            </div>
+            <!--<div class="col-md-6">
+               <div class="visit-pref-div">
+                    <h6 class="visit-pref" style="display:inline;">Visit preference: Day</h6>
+                    <select class="myinput" id="v-pref-day" name="v-pref-day" required="" style="display:inline;">
+      <option value="Monday">Monday</option>
+      <option value="Tuesday">Tuesday</option>
+      <option value="Wednesday">Wednesday</option>
+      <option value="Thursday">Thursday</option>
+      <option value="Friday">Friday</option>
+      <option value="Saturday">Saturday</option>
+    </select>
+    <div class="myclass">
+    <h6 class="slot-txt">Slot</h6>
+    <select class="myinput" id="choose-slot" name="choose-slot" required="" style="display:inline;">
+      <option value="slot1">9:30am to 11:30am </option>
+        <option value="slot2">12:00pm to 2:00pm </option>
+          <option value="slot3">3:00pm to 5:00pm </option>
+            <option value="slot4">5:30pm to 7:30pm </option>
+      
+    </select>
+    </div>
+                </div> 
+            </div>-->
+        </div>
+       
+     <form action="{% url 'checkavailableIcare' %}" method="POST">
+       {% csrf_token %}
+          <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="frmdate" class="label-color">From Date</label>
+                    
+                   
+                    
+                    
+
+                    <input type="date" class="myinput form-control" name="formdate" id="change-frm-date" value="">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="frmdate" class="label-color">To Date</label>
+                    <input type="date" class="myinput form-control" name="todate" id="change-to-date" value="" readonly>
+                </div>
+            </div>
+            <!--<div class="col-md-3">
+                <div class="form-group">
+                    <label for="frmdate" class="label-color">Selected Plan</label>
+                   <select class="myinput form-control custom-select" id="change-sel-plan" name="change-sel-plan">
+      <option value="weekly">Weekly Plan</option>
+      <option value="fortnightly">Fortnightly Plan</option>
+    </select>
+                </div>
+            </div>-->
+            <input type="hidden" id="change-sel-plan" name="Sel-plan" value="{{reqplantype}}">
+             <input type="hidden" id="month-dur" value="{{reqmonth}}">
+            <div class="col-md-3" id="pref-week-field" style="display:none;">
+                <div class="form-group">
+                    <label for="frmdate" class="label-color">Prefered Week</label>
+                   <select class="myinput form-control custom-select" id="change-pref-week" name="week-prefer-option">
+      <option value="1st and 3rd week" {% if reqday == "1st and 3rd week" %}selected{% endif %} >1st and 3rd week</option>
+      <option value="2nd and 4th week" {% if reqday == "2nd and 4th week" %}selected{% endif %} >2nd and 4th week</option>
+    </select>
+                </div>
+            </div>
+        
+       
+            <div class="col-md-3">
+               <div class="form-group">
+                   <label for="frmdate" class="label-color">Prefered Day</label>
+                   <select class="myinput form-control custom-select" id="change-pref-day" name="day-prefer-option">
+      <option value="1" {% if reqday == 1 %}selected{% endif %}>Monday</option>
+      <option value="2" {% if reqday == 2 %}selected{% endif %}>Tuesday</option>
+      <option value="3" {% if reqday == 3 %}selected{% endif %}>Wednesday</option>
+      <option value="4" {% if reqday == 4 %}selected{% endif %}>Thursday</option>
+      <option value="5" {% if reqday == 5 %}selected{% endif %}>Friday</option>
+      <option value="6" {% if reqday == 6 %}selected{% endif %}>Saturday</option>
+    </select>
+               </div> 
+            </div>
+            <div class="col-md-3">
+               <div class="form-group">
+                   <label for="frmdate" class="label-color">Prefered Slot</label>
+                   <select class="myinput form-control custom-select" id="change-pref-slot" name="slot-prefer-option">
+                    {% for slots in slot %}
+                    <option value="{{slots.id}}" >{{slots.starttime}} to {{slots.endtime}}</option>
+                   {% endfor %}
+    </select>
+               </div> 
+            </div>
+            <div class="col-md-3">
+                <div class="form-group" style="margin-top:24px;">
+                    <button type="submit" class="filter-submit-btn btn-block btn btn-primary"  id="filter-btn" name="filter-btn">Submit</button>
+                    <!--onclick="selectIcarefilter();" -->
+                </div>
+            </div>
+        </div></form>
+        <div class="row">
+            <div class="col-md-12">
+
+              {% for det in icare_records%}
+                <div class="icare-partner-block">
+                   <div class="row">
+                       <div class="col-md-2">
+                           <img src="{% static 'img/partner-1.png' %}" class="icare-img-block">
+                       </div>
+                       <div class="col-md-10">
+                           <div class="negative-margin">
+                           <h6 class="ic-name">{{det.name}}</h6>
+                           <p class="icare-desc">Description: {{det.description}}</p>
+                           <h6 class="available">Available</h6>
+                           </div>
+                           <button type="button" class="float-right set-appointment-btn btn btn-primary" data-toggle="modal" data-target="#set-appointment" data-id="{{det.user.id}}">SET APPONTMENT</button>
+                       </div>
+                   </div>
+                   
+               </div> 
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+    <footer class="site-footer">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-3">
+                <img src="{% static 'img/White-logo.png' %}" class="footer-logo">
+                <p class="foot-about">Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br> sed do eiusmod tempor<br> incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-heading">Contact</h4>
+                <div class="contact-info">
+                    <ul>
+                         <li><i class="fas fa-map-marker-alt"></i><span>0506, ABC street,<br> oldtown, Mumbai, MH</span></li>
+                        <li><i class="fas fa-phone-alt"></i><span>+91 9876543210</span></li>
+                        <li><i class="fas fa-envelope"></i><span>info@shravancare.in</span></li>
+                       
+                            </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-heading">All Links</h4>
+                <div class="contact-info">
+                    <ul>
+                         <a href="#what-we-do" class="links"><li class="links">What We Do</li></a>
+                         <a href="#pricing" class="links"><li class="links">Plan & Pricing</li></a>
+                         <a href="#testimonial" class="links"><li class="links">Client Reviews</li></a>
+                         <a href="#about" class="links"><li class="links">About Us</li></a>
+                         <a href="#why-us" class="links"><li class="links">Why Us</li></a>
+                         <a href="#icare-partner" class="links"><li class="links">Partners</li></a>
+                       </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-heading">Follow Us</h4>
+                <div class="contact-info">
+                    <ul class="d-flex flex-wrap align-items-center">
+                                <li><a href="#"><i class="my-icon fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="my-icon fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="my-icon fab fa-instagram"></i></a></li>
+                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copy-right">Copyrights 2020. All rights reserved by, Shravancare</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+   <script src="{% static 'js/slick.js' %}"></script>
+   <script src="{% static 'js/lightbox.js' %}"></script>
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+   <!--<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js" ></script>
+   <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js" ></script>
+   <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js" ></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js" ></script>-->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<!-- Select2 -->
+<script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"></script>
+
+
+
+<div class="modal fade" id="set-appointment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:0;">
+        <h2 class="set-appointment-head modal-title" id="exampleModalLabel">Set Appointment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <div class="row">
+           <div class="col-md-4">
+                      <div class="detail-card card">
+  <div class="card-body">
+    <ul class="bill-heading">
+        <li>Details of Customer Booking Service</li>
+        <hr class="cust-booking-line">
+    </ul>
+    <ul class="booking-details">
+        <li><span class="span-head">Customer Name:</span> <span class="booking-custname">{{userdetail.name}}</span></li>
+        <li><span class="span-head">Mobile No:</span> <span class="booking-custmob">{{userdetail.mobile}}</span></li>
+        <li>Address: <span class="booking-custadd">{{userdetail.address}}</span></li>
+    </ul>
+    <ul class="bill-heading">
+        <li>Details of Elders</li>
+        <hr class="cust-booking-line">
+    </ul>
+    <div class="elder-booking-details">
+    <ul class="booking-details-elders">
+        <li>Elders Name: <span class="booking-custname">{% for custparent in customerparents  %} {{custparent.parent_name}}, {{custparent.age}}-Year Old, {{custparent.gender}} {% if forloop.last %} {% else %} & {% endif %} {% endfor %}</span></li>
+        <li>Mobile No: <span class="booking-eldermob">{{elderdetail.mobile}}</span></li>
+        <li>Address: <span class="booking-elderadd">{{elderdetail.address}}</span></li>
+         <li>Pin Code: <span class="booking-elderadd">{{elderdetail.pincode.pincode_no}}</span></li>
+    </ul>
+    </div>
+  </div>
+</div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="slot-card card">
+                          <div class="card-body">
+                             <ul class="bill-heading">
+        <li>Slot Details</li>
+        <hr class="cust-booking-line">
+    </ul> 
+    <table id="datesTable" class="table table-bordered">
+    <thead>
+                     <tr>
+                       <th>Date</th>
+                       </tr>
+    </thead>                   
+  <tbody>
+      
+  </tbody>
+</table>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="final-plan-card card">
+                          <div class="card-body">
+                          <ul class="bill-heading">
+        <li>Plan Details</li>
+        <hr class="cust-booking-line">
+    </ul> 
+    <ul class="plan-details">
+        <li><i class="green-check-icon fas fa-check"></i>Month Duration: <span id="final-month-duration"></span><span style="padding-left:5px;">months</span></li>
+        <li><i class="green-check-icon fas fa-check"></i>From: <span id="final-from-date"></span> To: <span id="final-to-date"></span></li>
+          <li><i class="green-check-icon fas fa-check"></i>Selected Plan: <span id="final-selected-plan">Weekly</span></li>
+          <li id="pref-weeks"><i class="green-check-icon fas fa-check"></i>Prefered Week: <span id="final-pref-week"></span></li>
+          <li><i class="green-check-icon fas fa-check"></i>Prefered Day: <span id="final-pref-day"></span></li>
+          <li><i class="green-check-icon fas fa-check"></i>Prefered Slot: <span id="final-pref-slot"></span></li>
+          <li><i class="green-check-icon fas fa-check"></i>No of Visits: <span id="final-visits"></span><span style="padding-left:5px;">visits</span></li>
+          <li><i class="green-check-icon fas fa-check"></i>Total Cost: Rs<span id="final-total-cost" style="padding-left:5px;"></span>/-</li>
+    </ul>
+    </div>
+                      </div>
+                  </div>
+                  </div>
+                  <div class="row justify-content-center" style="margin-top:30px;">
+                    <input type="hidden" id="icarekaid" name="icarekaid" value="">
+                      <button type="button" name="confirm-btn" id="confirm-btn" onClick="getAlldata();"  class="set-appointment-btn btn btn-primary" >CONFIRM</button>
+                  </div>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+<script>
+   var palantype = "{{reqplantype}}";
+
+function addtoTable(arr){
+    var tbodyRef = document.getElementById('datesTable').getElementsByTagName('tbody')[0];
+
+    for(var i=0;i<arr.length;i++){
+        
+// Insert a row at the end of table
+var newRow = tbodyRef.insertRow();
+
+// Insert a cell at the end of the row
+var newCell = newRow.insertCell();
+
+// Append a text node to the cell
+var newText = document.createTextNode(arr[i]);
+newCell.appendChild(newText);
+    }
+}
+var appointments_array= [];
+    $("#change-sel-plan").change(function () {
+            
+             if ($(this).val() == "Weekly") {
+                  $("#pref-week-field").hide();
+                  
+             }
+             else{
+                   $("#pref-week-field").show();
+             }
+        });
+
+    
+       
+        $('#month-dur').val({{reqmonth}});
+ $('#change-frm-date').val("{{reqstart}}");       
+$('#change-to-date').val("{{reqend}}");
+$('#change-sel-plan').val("{{reqplantype}}");
+$('#change-pref-week').val("{{reqweek}}");
+$('#change-pref-day').val({{reqday}});
+$('#change-pref-slot').val("{{reqslot}}");
+if ( palantype  == "Fortnightly") {
+    $("#pref-week-field").show();
+    $("#pref-weeks").show()
+}
+else{
+ $("#pref-week-field").hide();
+  $("#pref-weeks").hide()
+}
+$('#set-appointment').on('show.bs.modal', function(e) {
+
+     
+var icareidmain=$(e.relatedTarget).data('id');
+
+
+// Delete all row at the end of table
+var planfromdate = new Date("{{reqstart}}" +"T00:00:00Z");
+$('#icarekaid').val(icareidmain);
+var preff_day = {{reqday}};
+var firstdate = new Date();
+var diff = 0;
+if(preff_day<planfromdate.getDay()){
+     diff = (7-(planfromdate.getDay() - preff_day));
+}else{
+    diff = (preff_day - planfromdate.getDay());
+}
+  console.log("dt"+planfromdate);
+  console.log("diff"+diff);
+
+  planfromdate.setDate(planfromdate.getDate() +diff);  
+  var prev_day = ("0" + planfromdate.getDate()).slice(-2);
+var prev_month = ("0" + (planfromdate.getMonth()+1)).slice(-2);
+var prev = planfromdate.getFullYear()+"-"+(prev_month)+"-"+(prev_day) ;
+var arr = [prev];
+for(var i=0;i<(({{reqmonth}} * 4) - 1);i++){
+ planfromdate.setDate(planfromdate.getDate() + 7); 
+ prev_day = ("0" + planfromdate.getDate()).slice(-2);
+prev_month = ("0" + (planfromdate.getMonth()+1)).slice(-2);
+prev = planfromdate.getFullYear()+"-"+(prev_month)+"-"+(prev_day) ;
+arr.push(prev);
+} 
+console.log(arr);
+appointments_array = arr;
+addtoTable(arr);
+  
+});
+$('#change-frm-date').change(function() {
+    var selected_date= $(this).val();
+    console.log(selected_date);
+    var timestamp = Date.parse(selected_date);
+var dateObject = new Date(timestamp);
+dateObject.setDate(dateObject.getDate() + 168);
+var new_day = ("0" + dateObject.getDate()).slice(-2);
+var new_month = ("0" + (dateObject.getMonth() + 1)).slice(-2);
+var new_prevdate = dateObject.getFullYear()+"-"+(new_month)+"-"+(new_day) ;
+$('#change-to-date').val(new_prevdate);
+});
+
+  $('#final-month-duration').text({{reqmonth}});
+  $('#final-from-date').text("{{reqstart}}");
+   $('#final-to-date').text("{{reqend}}");
+     $('#final-selected-plan').text("{{reqplantype}}");
+     $('#final-pref-week').text("{{reqweek}}");
+     $('#final-pref-day').text({{reqday}});
+     $('#final-pref-slot').text("{{reqslot}}");
+     let final_month = $('#month-dur').val();
+     //console.log(final_month);
+   let final_visitcountfort = parseInt(final_month) * 2;
+   let final_visitcountweek = parseInt(final_month) * 4;
+   let final_costfort = parseInt(final_month) * 14175;
+   let final_costweek = parseInt(final_month) * 24375;
+       if (palantype == "Fortnightly"){
+           $('#final-visits').text(final_visitcountfort); 
+           $('#final-total-cost').text(final_costfort); 
+           
+       }
+       else{
+          $('#final-visits').text(final_visitcountweek);
+          $('#final-total-cost').text(final_costweek); 
+       }
+function getAlldata(){
+
+    var invoice_data = {"icare":$('#icarekaid').val(),"appointments":appointments_array,"months":{{reqmonth}},"fromdate":"{{reqstart}}","todate":"{{reqend}}","plan":"{{reqplantype}}", "prefweek":"{{reqweek}}","prefday":{{reqday}},"prefslot":"{{reqslot}}",
+    "visit":$('#final-visits').text(),"cost":$('#final-total-cost').text()};
+    var newjson1 = JSON.stringify(invoice_data);
+    //console.log(newjson1);
+    $.ajax({
+    "url": "save_package",
+    "type": "post",
+    "data": {"maindata":newjson1 },
+    "headers": { "X-CSRFToken": '{{csrf_token}}' },
+    success:function(datamain){
+          alert(datamain);
+          if(datamain=="Success"){
+            alert("Schedule Set Successfully");
+            window.close();
+          }else{
+           
+             alert(datamain); 
+          }
+          
+      }
+});
+    
+}
+
+</script>
+</body>
+</html>
+    
+</body>

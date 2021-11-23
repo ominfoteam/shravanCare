@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+<body class="hold-transition sidebar-mini layout-fixed">
+   
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+    <div class="content-wrapper">
+
+  <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Invoice Details Grid</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="shravancare_dashboard_frame.html">Home</a></li>
+              <li class="breadcrumb-item active">Invoice Details Grid</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+   <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+	
+            
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="col-md-3">  <a href="{% url 'addInvoice' %}" ><button type="button" class="btn btn-block btn-primary"><i class="glyphicon  glyphicon-plus"></i>New Invoice</button></a>
+              </div></div>
+              <!-- /.card-header -->
+              <div class="card-body">
+<table id="invoice-details-grid" class="table table-bordered table-striped">
+<thead>
+                     <tr>
+                       
+                        <th>Invoice Number</th>
+                        <th>Invoice Date</th>
+                        <th>Invoice Type</th>
+                        <th>Customer Name</th>
+                        <th>Elder Name</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                      </tr>
+                  </thead>
+<tbody>
+
+  
+  {% for inv in invoice %}
+  <tr>
+    
+    <th>{{inv.invoiceno}}</th>
+    <th>{{inv.invdate}}</th>
+    <th>{{inv.plantype}}</th>
+    <th>{{inv.custname}}</th>
+    <th>{{inv.eldersname}}</th>
+    <th>{{inv.totalcharges}}</th>
+    <td> <div class="btn-group">
+                         
+      <a href="{% url 'viewInvoice' inv.id %}"><button type="button" class="btn btn-bg btn-primary" s><i class="fa fa-eye" data-toggle="tooltip" data-placement="auto" title="View"></i></button></a>
+  
+     {% if inv.invoicetype == "Non-Package" %} <a href="{% url 'editInvoice' inv.id %}"><button type="button" class="btn  btn-warning" ><i class="fa fa-edit" data-toggle="tooltip" data-placement="auto" title="Edit"></i></button></a>{% endif %}
+     
+      </div></td>
+   
+
+  </tr>
+{% endfor %}
+                
+                      
+                      
+                     
+                  </tbody>
+                
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+     <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+  <!-- /.content-wrapper -->
+  {% include "shravanmanagemet/footer.html" %}
+   <script>
+       $('#invoice-details-grid').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+   </script>
+	</body>
+</html>

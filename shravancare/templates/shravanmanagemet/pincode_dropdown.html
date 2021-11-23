@@ -1,0 +1,4 @@
+<option value="">---------</option>
+{% for pincod in pincodes %}
+<option value="{{ pincod.pk }}">{{ pincod.pincode_no }}</option>
+{% endfor %}

@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+   <style>
+       .ck-editor__editable_inline {
+    min-height: 300px;
+}
+   </style>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Testimonials</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="shravancare_dashboard_frame.html">Home</a></li>
+              <li class="breadcrumb-item active">Testimonials</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="" method="POST" name="state-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Testimonials</h3>
+
+          
+          </div>
+  
+        
+           
+            <div class="card-body">
+                <div class="row">
+              <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+             <label for="customerName">Written By</label>
+                    <input type="text" class="form-control" {{view}} name="testimonial_name" id="testimonial_name"  placeholder="Name" required  value="{{testim.written_by}}">
+        </div>
+    </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+                    <label for="customerName">Subtext</label>
+                     <input type="text" class="form-control" name="testimonial_subtext"  {{view}} id="testimonial_subtext"  placeholder="Subtext" required  value="{{testim.subtext}}">
+        </div>  
+ </div>
+ </div>
+ <div class="row">
+   <div class="col-lg-8 col-md-8 col-xs-8">
+         <div class="form-group">
+                    <label for="customerName">Content</label>
+                     <textarea class="form-control" name="testimonial_content" {{view}} id="testimonial_content" rows="5">{{testim.content}}</textarea>
+        </div>  
+ </div>
+ </div>
+ <div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+                    <label for="customerName">Position</label>
+                    <input type="number" class="form-control" {{view}} name="testimonial_position" id="testimonial_position" min="0" placeholder="Position" required  value="{{testim.position}}">
+                  </div>
+        </div>   
+ </div>
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" name="savebutton" {{view}} class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                <button type="button" class="btn btn-block btn-secondary" onclick="location.href='sharavancare_testimonial_grid.html';">Exit</button>
+              </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+<script>
+    ClassicEditor
+    .create( document.querySelector( '#testimonial_content' ), {
+        codeBlock: {
+            languages: [
+                { language: 'css', label: 'CSS' },
+                { language: 'html', label: 'HTML' }
+            ]
+        }
+    }{% if view %}, isReadOnly {% endif %} );
+    
+</script>
+	</body>
+</html>

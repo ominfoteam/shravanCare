@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+   <style>
+      
+   </style>
+<body class="hold-transition sidebar-mini layout-fixed">
+   
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+    <div class="content-wrapper">
+
+  <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Icare Partner Schedule Report Grid</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="shravancare_dashboard_frame.html">Home</a></li>
+              <li class="breadcrumb-item active">Icare Partner Schedule Report Grid</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+   <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+	
+            
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                  <!--<div class="col-md-3"><button type="button" class="btn btn-block btn-primary" onclick="location.href = 'sharavancare_landing_part_manage.html';"><i class="glyphicon  glyphicon-plus"></i>   New Landing Part</button>
+                </div>-->
+                <div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+        <label for="date">From Date</label>
+		<input type="date" id="min" name="min" class="form-control">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+        <label for="date">To Date</label>
+		  <input type="date" id="max" name="max" class="form-control">
+        </div>
+    </div>
+    </div>
+                
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+<table id="icare-partner-schedule-report-grid" class="table table-bordered table-striped">
+<thead>
+                     <tr>
+                       
+                        <th>Icare Partner Name</th>
+                        <th>Date</th>
+                        <th>Slot</th>
+                        <th>Customer Name</th>
+                        <th>Elder Name</th>
+                        <th>Status</th>
+                      </tr>
+                  </thead>
+<tbody>
+
+  
+                      <tr onclick="location.href = 'shravancare_icare_partner_schedule_report.html';" style="cursor:pointer;">
+                        <td>Nigel</td>
+                   <td>06/08/2020</td>
+                      <td>Slot 1</td>
+                       <td>Harsha</td>
+                       <td>John Wick, Anna Wick</td>
+                       <td>Active</td>
+                      </tr>
+                     
+                      
+                     
+                  </tbody>
+                
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+     <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+  <!-- /.content-wrapper -->
+  {% include "shravanmanagemet/footer.html" %}
+   <script>
+       $('#icare-partner-schedule-report-grid').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+   </script>
+	</body>
+</html>

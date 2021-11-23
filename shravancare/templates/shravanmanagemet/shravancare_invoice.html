@@ -1,0 +1,309 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Shravancare Invoice</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800" rel="stylesheet">
+ <style>
+ body{
+     font-family: 'Poppins', sans-serif;
+ }
+  .content{
+    padding: .5rem .5rem;
+     }
+ .invoice-box {
+    width: 100%;
+    border: 1px solid #eee;
+    background-color: #fff;
+}
+.logo{
+    max-width:100%;
+    height:auto;
+    width:20%;
+    padding-left:3rem;
+}
+.header-invoice-img{
+   max-width:100%;
+    height:auto; 
+}
+.invoice-header-details {
+    padding: 1rem 3rem;
+}
+.invoice-to{
+    color:#4A4A4A;
+    font-weight:400;
+    font-size:30px;
+    margin-bottom: 0;
+}
+.invoice-name{
+   color:#4A4A4A;
+    font-weight:300;
+    font-size:30px; 
+}
+.invoice-address{
+    color:#646464;
+    font-size:18px;
+    font-weight:400;
+}
+.cust-name{
+    font-size:18px;
+}
+.cust-date{
+    font-size:18px;
+}
+.invoice-description-section{
+    margin-top:20px;
+}
+.desc-heading{
+    color:#00529C;
+    font-size:18px;
+    padding:1rem 3rem;
+    font-weight: 600;
+}
+.detail-description{
+    background:#F0F0F0;
+    padding:20px 90px;
+}
+.tb-width{
+    width:650px;
+}
+.payment-status{
+    text-align:center;
+    color:green;
+    font-weight: 800;
+}
+.payment-details{
+    background:#00529C;
+   padding: 1rem 3rem;
+}
+.payment-type {
+    color: #fff;
+    padding-top: 15px;
+    font-size: 18px;
+}
+.total-payment2 {
+    color: #fff;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 100;
+}
+.total-payment1 {
+    color: #fff;
+    text-align: right;
+    font-size: 18px;
+    padding-top:15px;
+}
+.thanks-text{
+    font-size:28px;
+    color:#4A4A4A;
+}
+.thank-you-section {
+    padding: 20px 90px;
+}
+.elder-desc {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.elder-desc li {
+    margin-bottom: 10px;
+}
+.table-bordered td, .table-bordered th {
+    border: 1px solid #000;
+}
+.table thead th{
+    border-bottom: 1px solid #000;
+}
+
+
+}
+@media print {
+  .no-print {
+    display: none;
+  }
+  .detail-description{
+    background:#F0F0F0 !important;
+    -webkit-print-color-adjust: exact; 
+  }
+}
+@media only screen and (max-width: 768px) {
+   .logo{
+       width:30%;
+   } 
+   .invoice-to{
+       font-size:20px;
+   }
+   .invoice-name{
+       font-size:20px;
+   }
+   .invoice-address{
+       font-size: 15px;
+   }
+   .float-right{
+       float: none !important;
+   }
+   .cust-name , .cust-date {
+    font-size: 15px;
+   }
+   .detail-description{
+       padding:5px 5px;
+   }
+   .tb-width{
+       width:unset;
+   }
+   .payment-type{
+       padding-top:0;
+   }
+   .total-payment1 , .total-payment2{
+       text-align:unset;
+   }
+   .thank-you-section{
+       padding:20px 20px;
+   }
+   .thanks-text{
+      font-size: 20px; 
+   }
+}
+ </style>
+ <style type="text/css" media="print">
+    * {
+        -webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+        color-adjust: exact !important;  /*Firefox*/
+    }
+    </style>
+<!--<script type="text/javascript"> 
+  window.addEventListener("load", window.print());
+</script>-->
+</head>
+
+<body>
+  <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-12">
+                  <div class="invoice-box  mb-3">
+                      <div class="invoice-logo">
+                         <img src="{% static 'img/Shravancare-Square-Logo.png' %}" class="logo" alt="shravancare-logo">
+                      </div>
+                      <div class="invoice-header">
+                          <img src="{% static 'img/shravancare-header-invoice.png' %}" class="header-invoice-img">
+                      </div>
+
+                      <div class="invoice-header-details">
+                        <div class="row">
+                <div class="col-md-6 col-sm-6 col-lg-6">
+                    <h2 class="invoice-to">Invoice to,</h2>
+                    <h2 class="invoice-name">{{invdetails.custname}}</h2>
+                    <h5 class="invoice-address">{{invdetails.custaddr}}</h5>
+                </div>
+                <div class="col-md-6 col-sm- col-lg-6">
+                    <div class="float-right">
+                    <h2 class="invoice-to">Invoice Name: <span class="cust-name">{{invdetails.plantype}} plan</span></h2>
+                    <h2 class="invoice-to">Date: <span class="cust-date">{{invdetails.invdate}}</span></h2>
+                </div>
+                </div>
+                
+            </div>
+            </div>
+                      
+          <div class="invoice-description-section">
+              <!--<div class="row">
+                  <div class="col-md-12">
+                      <h3 class="desc-heading">Description</h3>
+                  </div>
+              </div>-->
+               <div class="detail-description">
+              <div class="row">
+                          <div class="col-md-12">
+                             <table class="table table-bordered" style="background:#F0F0F0;">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tb-width"><ul class="elder-desc">
+            <li>Elder Name: <span>{{invdetails.eldersname}}</span></li>
+            <li>Address: <span>{{invdetails.elderaddr}}{{invdetails.elderpincode}}</span></li>
+            <li>Plan: <span>{{invdetails.plantype}} Plan</span></li>
+             <li>Plan Cost: <span>Rs {{invdetails.totalcharges}}/-</span></li>
+              <li>Time Period: <span>{{invdetails.startdate}} to {{invdetails.enddate}}</span></li>
+              <li>Time Visits: <span>{{invdetails.numberofvisits}} Visits</span></li>
+        </ul></td>
+        <td><b>Rs. {{invdetails.subtotal}}/-</td>
+        
+      </tr>
+      <tr>
+        <td >Total Base Value</td>
+        <td><b>Rs. {{invdetails.subtotal}}/-</b></td>
+       
+      </tr>
+      <tr>
+        <td >CGST 9%:</td>
+        <td><b>Rs. {{invdetails.cgst}}/-</b></td>
+      </tr>
+      <tr>
+        <td>SGST 9%:</td>
+        <td><b>Rs. {{invdetails.cgst}}/-</b></td>
+      </tr>
+      <tr>
+        <td>IGST 18%:</td>
+        <td><b>Rs.{{invdetails.igst}}/-</b></td>
+      </tr>
+      <tr>
+        <td>Discount:</td>
+        <td><b>Rs.{{invdetails.discountcharge}}/-</b></td>
+      </tr>
+      <tr>
+        <td>Total Invoice Value:</td>
+        <td><b>Rs.{{invdetails.totalcharges}}/-</b></td>
+      </tr>
+    </tbody>
+  </table>
+                  </div>
+              </div>
+          </div>
+          <div class="payment-status">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h5 class="payment-status p-4">{{invdetails.paymentstatus}}</h5>
+                  </div>
+              </div>
+          </div>
+          <div class="payment-details">
+              <div class="row">
+                  <div class="col-md-6">
+                   <!--<h4 class="payment-type">Paid by Master Card</h4>-->   
+                  </div>
+                  <div class="col-md-6">
+                      <h4 class="total-payment1">Total-Cost: Rs {{invdetails.totalcharges}} /-</h4>
+                      
+                  </div>
+              </div>
+          </div>
+          <div class="thank-you-section">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h4 class="thanks-text">
+                          Thank you for choosing us !
+                      </h4>
+                  </div>
+              </div>
+          </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>

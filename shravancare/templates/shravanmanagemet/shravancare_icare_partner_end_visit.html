@@ -1,0 +1,267 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Shravancare</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css' %}" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' %}" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="{% static 'css/slick.css' %}">-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js' %}" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <style>
+  .container{
+      max-width:600px;
+      padding-left: 0;
+    padding-right: 0;
+    overflow-x: hidden !important;
+  } 
+  body {
+    font-family: 'Poppins', sans-serif;
+    background:#F9F9F9;
+    margin-bottom:50px;
+}
+.card{
+    border-bottom:0;
+    border-left:unset;
+    border-right:unset;
+    border-top:0;
+}
+.card-body{
+    background:#F9F9F9;
+}
+  .card-header{
+      background:#00529C;
+      height:70px;
+     display: inline-flex;
+    align-items: center;
+    justify-content: start;
+    border-radius: 0 !important;
+  }
+  .header-title{
+      font-size:18px;
+      color:#fff;
+      margin-bottom: 0;
+    padding-left: 10px;
+  }
+  .arrow-icon{
+      color:#fff;
+  }
+  .end-visit-block{
+      border-radius: 10px;
+    background: #fff;
+   padding: 15px 10px 10px 10px;
+    margin: 8px 0;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 19%), 0 1px 3px rgb(0 0 0 / 23%);
+  }
+  .service-title{
+      font-size:15px;
+      color:#000;
+      font-weight:600;
+  }
+  .mob-view{
+      width:50%;
+  }
+  .service-checked{
+      float:right;
+  }
+  .table-sm td{
+      padding-left:0;
+  }
+  .file-img{
+      max-width:100%;
+      height:auto;
+      width:50px;
+      margin-left:5px;
+      margin-right:5px;
+      border-radius: 10px;
+      background: #eee;
+      
+  }
+  .footer{
+     position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    background:#f9f9f9;
+  }
+  .start-btn{
+      background:#00529C;
+      color:#fff;
+      border-color:#00529C;
+  }
+   .start-btn:hover{
+      color:#00529C;
+      background:#fff;
+      border-color:#00529C;
+  }
+  .start-btn:focus{
+      box-shadow:none;
+  }
+  td {
+    font-size: 15px;
+}
+ .checkbox {
+  float:right;
+}
+.checkbox label {
+  display: inline;
+}
+.checkbox .input-assumpte {
+  display: none;
+}
+.input-assumpte + label:after {
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  transition-duration: 0.3s;
+  width: 16px;
+  height: 16px;
+  content: '';
+  margin-left: 10px;
+  background: 50%/50% 50% no-repeat;
+}
+.input-assumpte:checked + label:after {
+  background-color: #3D9F15;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+}
+.input-assumpte.change-color:checked + label:after {
+    background-color: #FFC72F;
+}
+.completed-img{
+    max-width:100%;
+    height:auto;
+    display: block;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.thank-you-text{
+    color:#3D9F15;
+    font-size:18px;
+    font-weight:600;
+    text-align:center;
+    margin-top:20px;
+}
+.next-btn{
+    border-color:#00529C;
+    color:#00529C;
+}
+.next-btn:hover{
+    border-color:#00529C;
+    color:#fff;
+    background:#00529C;
+}
+.next-btn:focus{
+    box-shadow:none;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="arrow-icon fas fa-arrow-left"></i><h4 class="header-title">End Visit</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="end-visit-block">
+                            <div class="row">
+                                <div class="mob-view col-md-6">
+                                    <h4 class="service-title">Refrigerator</h4>
+                                </div>
+                                <div class="mob-view col-md-6">
+                                    <div class="checkbox">
+  <input type="checkbox" class="input-assumpte" id="input-confidencial" checked="checked" disabled>
+  <label for="input-confidencial"></label>
+</div>
+                            </div>
+                        </div>
+                        <table class="table table-borderless table-sm">
+                            <!--<thead></thead>-->
+                            <tbody>
+                                 <tr>
+                                <td>Details:</td>
+                                <td>Problem was in cooling system, The refrigerator ran out of gas, I filled it.</td>
+                                </tr>
+                                <tr>
+                                <td>Amount:</td>
+                                <td>Rs. 560/-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="font-size:15px;">Files</p>
+                        <img src="{% static 'img/Shravancare-Square-Logo.png' %}" class="file-img">
+                        <img src="{% static 'img/Shravancare-Square-Logo.png' %}" class="file-img">
+                        
+                    </div>
+                    <div class="end-visit-block">
+                            <div class="row">
+                                <div class="mob-view col-md-6">
+                                    <h4 class="service-title">Vegitables Stock</h4>
+                                </div>
+                                <div class="mob-view col-md-6">
+                                    <div class="checkbox">
+  <input type="checkbox" class="input-assumpte" id="input-confidencial" checked="checked" disabled>
+  <label for="input-confidencial"></label>
+</div>
+                            </div>
+                        </div>
+                        <table class="table table-borderless table-sm">
+                            <!--<thead></thead>-->
+                            <tbody>
+                                 <tr>
+                                <td>Details:</td>
+                                <td>Problem was in cooling system, The refrigerator ran out of gas, I filled it.</td>
+                                </tr>
+                                <tr>
+                                <td>Amount:</td>
+                                <td>Rs. 560/-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="font-size:15px;">Files</p>
+                        <img src="{% static 'img/Shravancare-Square-Logo.png' %}" class="file-img">
+                        <img src="{% static 'img/Shravancare-Square-Logo.png' %}" class="file-img">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+     <footer class="container footer">
+         <button type="button" class="start-btn btn-block btn btn-primary" data-toggle="modal" data-target="#thank-you">END VISIT</button>
+         </footer>
+         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js' %}" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+         <div class="modal fade" id="thank-you" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:0;">
+       <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>-->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="{% static 'img/Completed-illustration.png' %}" class="completed-img">
+        <h4 class="thank-you-text">Your Visit Completed!</h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="next-btn btn btn-block btn-outline-primary" data-dismiss="modal">OKAY</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

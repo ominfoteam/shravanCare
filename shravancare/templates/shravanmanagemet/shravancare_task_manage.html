@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Task Form</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Task Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="" method="POST" name="state-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Task</h3>
+
+          
+          </div>
+  
+           
+           
+            <div class="card-body">
+                <div class="row">
+                   
+              <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                <label for="inputStatus">Task Category</label>
+                <select class="form-control custom-select" name="task_cat"  {{view}}  id="task_cat" required>
+           <option value>SELECT CATEGORY</option> 
+            {% for taskcats in taskcat %}        
+          <option value="{{taskcats.id}}" {% if taskcats.id == taskdetail.categ_id.id %} selected="selected" {% endif %} >{{taskcats.categName}}</option>
+          {% endfor %}
+          </select>
+              </div>
+         </div>
+         <div class="col-lg-6 col-md-6 col-xs-6">
+             <div class="form-group">
+                    <label for="customerName">Task Name</label>
+                    <input type="text" class="form-control" name="task_name"  {{view}}  id="task_name" placeholder="Task Name" required value="{{taskdetail.taskName}}" >
+                  </div>
+         </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+                    <label for="customerName">Question</label>
+                    <input type="text" class="form-control" name="ques"  {{view}}  id="ques" placeholder="Question" required value="{{taskdetail.question}}" >
+                  </div>
+        </div>  
+        <div class="col-lg-6 col-md-6 col-xs-6">
+            <div class="form-group">
+            <label for="customerName">Position</label>
+                    <input type="number" class="form-control" name="position"  {{view}}  id="position" placeholder="Position" min="0" required value="{{taskdetail.position}}" >
+                    </div>
+                    
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-3">
+          <div class="form-group">
+           <label for="inputStatus">Add Due Date?</label>
+           <select class="form-control custom-select" name="isdue"  {{view}}  id="isdue" >
+     <option value="YES" {% if taskdetail.is_due == 'YES' %} selected {% endif %} >Yes</option>
+     <option value="NO" {% if taskdetail.is_due == 'NO' %} selected {% endif %} >No</option>
+     </select>
+         </div>
+         </div>
+ </div>
+ <!--<div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+            <div class="form-check">
+                          <input class="form-check-input" type="checkbox">
+                          <label class="form-check-label">Is Compulsory</label>
+                        </div>
+                  </div>
+        </div>   
+ </div> -->
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" name="savebutton" class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                <a href="{% url 'gridTask' %}"><button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+              </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+
+	</body>
+</html>

@@ -1,0 +1,386 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+   <style>
+       .ck-editor__editable_inline {
+    min-height: 300px;
+}
+   </style>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Customers</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="shravancare_dashboard_frame.html">Home</a></li>
+              <li class="breadcrumb-item active">Customer Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="" method="POST" name="cust-form" enctype="multipart/form-data">
+    <!-- Main content -->
+    {% csrf_token %}
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Customers</h3>
+            <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <!--<button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>-->
+                </div>
+
+          
+          </div>
+  
+           
+           
+            <div class="card-body">
+                <div class="row">
+              <div class="col-lg-4 col-md-4 col-xs-4">
+          <div class="form-group">
+             <label for="customerName">Name</label>
+                    <input type="text" class="form-control" name="cust_name" id="cust_name"  disabled value="{{customer.name}}" >
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-4">
+         <div class="form-group">
+                    <label for="customerName">Email</label>
+                     <input type="email" class="form-control" name="cust_email" id="cust_email" disabled value="{{customer.user.email}}" >
+        </div>  
+ </div>
+ <div class="col-lg-4 col-md-4 col-xs-4">
+         <div class="form-group">
+                    <label for="customerName">Mobile Number</label>
+                     <input type="text" class="form-control" name="cust_mob" id="cust_mob" disabled value="{{customer.mobile}}" >
+        </div>  
+ </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+   
+ 
+ </div>
+ <div class="row">
+   <div class="col-lg-8 col-md-8 col-xs-8">
+         <div class="form-group">
+                    <label for="customerName">Address</label>
+                     <textarea class="form-control" name="cust_address" id="cust_address" rows="3" disabled>{{customer.address}}</textarea>
+        </div>  
+ </div>
+ </div>
+        
+ <div class="row">
+               
+  <div class="col-lg-4 col-md-4 col-xs-4">
+<div class="form-group">
+  <label for="inputStatus">Country</label>
+  <select class="form-control custom-select" name="cust_country" id="cust_country" disabled>
+      
+<option value="{{customer.country.id}}"  >{{customer.country.country_name}}</option>
+
+</select>
+</div>
+</div>
+
+ <div class="col-lg-4 col-md-4 col-xs-4 half-inp">
+<div class="form-group">
+  <label for="inputStatus">State</label>
+  <select class="form-control custom-select" name="cust_state" id="cust_state" disabled>
+    <option value="{{customer.state.id}}"  >{{customer.state.state_name}}</option>
+</select>
+</div>
+</div>
+
+<div class="col-lg-4 col-md-4 col-xs-4 half-inp">
+ <div class="form-group">
+  <label for="inputStatus">City</label>
+  <select class="form-control custom-select" name="cust_city" id="cust_city" disabled>
+    <option value="{{customer.city.id}}"  >{{customer.city.city_name}}</option>
+</select>
+</div>
+</div>
+
+ 
+
+</div>
+
+ 
+ 
+ 
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+         <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Elder Details</h3>
+            <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <!--<button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>-->
+                </div>
+
+          
+          </div>
+  
+           
+           
+            <div class="card-body">
+
+                <div class="row">
+                  {% for elder in eldernames %}
+         
+              <div class="col-lg-4 col-md-4 col-xs-4">
+          <div class="form-group">
+             <!--<label for="customerName">Name</label>-->
+                    <input type="text" class="form-control" name="elder_name" id="elder_name" value="{{elder.parent_name}}" disabled  >
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-4">
+          <div class="form-group">
+             <!--<label for="customerName">Age</label>-->
+                    <input type="text" class="form-control" name="elder_age" id="elder_age" value="{{elder.age}}"  disabled  >
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-xs-4">
+          <div class="form-group">
+             <!--<label for="customerName">Gender</label>-->
+                    <select name="elder_gender" id="elder_gender" class="form-control custom-select" disabled> 
+					<option value="{{elder.gender}}" selected>{{elder.gender}}</option>
+					
+					</select>
+        </div>
+    </div>
+         
+       {% endfor %}
+        	
+              
+ </div>
+ 
+ <div class="row">
+   <div class="col-lg-8 col-md-8 col-xs-8">
+         <div class="form-group">
+                    <label for="customerName">Address</label>
+                     <textarea class="form-control" name="elder_address" id="elder_address" rows="3" disabled>{{parentsdets.address}}</textarea>
+        </div>  
+ </div>
+ </div>
+ 
+        
+ <div class="row">
+               
+  <div class="col-lg-3 col-md-3 col-xs-3">
+<div class="form-group">
+  <label for="inputStatus">Country</label>
+  <select class="form-control custom-select" name="elder_country" id="elder_country" disabled>
+
+<option value="{{parentsdets.country.id}}" >{{parentsdets.country.country_name}}</option>
+
+</select>
+</div>
+</div>
+
+ <div class="col-lg-3 col-md-3 col-xs-3 half-inp">
+<div class="form-group">
+  <label for="inputStatus">State</label>
+  <select class="form-control custom-select" name="elder_state" id="elder_state" disabled>
+    <option value="{{parentsdets.state.id}}" >{{parentsdets.state.state_name}}</option>
+</select>
+</div>
+</div>
+
+<div class="col-lg-3 col-md-3 col-xs-3 half-inp">
+ <div class="form-group">
+  <label for="inputStatus">City</label>
+  <select class="form-control custom-select" name="elder_city" id="elder_city" disabled>
+    <option value="{{parentsdets.city.id}}" >{{parentsdets.city.city_name}}</option>
+</select>
+</div>
+</div>
+
+<div class="col-lg-3 col-md-3 col-xs-3 half-inp">
+<div class="form-group">
+  <label for="inputStatus">Pincode</label>
+  <select class="form-control custom-select" name="elder_pincode" id="elder_pincode" disabled>
+    <option value="{{parentsdets.pincode.id}}" >{{parentsdets.pincode.pincode_no}}</option>
+</select>
+</div>
+</div>
+ 
+
+</div>
+
+ <div class="row">
+     <div class="col-lg-8 col-md-8 col-xs-8">
+         <div class="form-group">
+             <label for="customerName">Instructions</label>
+             <textarea class="form-control" name="elder_instruction" id="elder_instruction" rows="3" {{view}}>{{parentsdets.description}}</textarea>
+         </div>
+     </div>
+ </div>
+ 
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" name="savebutton" class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                <a href="{% url 'gridCustomer' %}"><button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+            </div>
+            </div>
+           
+            </div>  </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+<script>
+    ClassicEditor
+    .create( document.querySelector( '#testimonial_content' ), {
+        codeBlock: {
+            languages: [
+                { language: 'css', label: 'CSS' },
+                { language: 'html', label: 'HTML' }
+            ]
+        }
+    } );
+    
+</script>
+
+<script>
+  $("#cust_country").change(function () {
+      const url = "{% url 'load_state' %}"
+      const countryId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'country_id': countryId   
+          },
+          success: function (data) {  
+              $("#cust_state").html(data); 
+              var selectcity = $('#cust_city');
+              selectcity.empty().append('<option value="">---Select State---</option>');
+
+          }
+      });
+
+  });
+
+
+  $("#cust_state").change(function () {
+      const url = "{% url 'load_city' %}"
+      const stateId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'state_id': stateId   
+          },
+          success: function (data) {  
+              $("#cust_city").html(data); 
+                 }
+      });
+
+  });
+
+  
+  $("#elder_country").change(function () {
+      const url = "{% url 'load_state' %}"
+      const countryId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'country_id': countryId   
+          },
+          success: function (data) {  
+              $("#elder_state").html(data); 
+              var selectcity = $('#elder_city');
+              selectcity.empty().append('<option value="">---Select State---</option>');
+var selectpincode = $('#elder_pincode');
+selectpincode.empty().append('<option value="">---Select State---</option>');
+          }
+      });
+
+  });
+
+
+  $("#elder_state").change(function () {
+      const url = "{% url 'load_city' %}"
+      const stateId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'state_id': stateId   
+          },
+          success: function (data) {  
+              $("#elder_city").html(data); 
+              var selectpincode = $('#elder_pincode');
+selectpincode.empty().append('<option value="">---Select City---</option>');
+          }
+      });
+
+  });
+
+
+
+  $("#elder_city").change(function () {
+      const url = "{% url 'load_pincodes' %}"
+      const cityId = $(this).val();  
+      //alert(cityId) 
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'city_id': cityId  ,
+              'temp':cityId 
+              
+          },
+          success: function (data) {  
+              $("#elder_pincode").html(data); 
+             
+          }
+      });
+
+  });
+</script>
+	</body>
+</html>

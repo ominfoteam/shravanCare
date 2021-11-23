@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Task Category</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Task Category</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <form action="" method="POST" name="task-form" enctype="multipart/form-data"> 
+    {% csrf_token %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Task Category</h3>
+
+          
+          </div>
+        
+           
+            <div class="card-body">
+                <div class="row">
+                   
+              <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                    <label for="customerName">Task Category Name</label>
+                    <input type="text" class="form-control" name="taskcatname"  {{view}}  id="taskcatname" placeholder="Task Category Name" required value="{{taskcatdetails.categName}}" >
+                  </div>
+         </div>
+         <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                    <label for="customerName">Task Category Position</label>
+                    <input type="number" class="form-control" name="taskcatpos"  {{view}}  id="taskcatpos" placeholder="Task Category Position" required value="{{taskcatdetails.position}}" >
+                  </div>
+         </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+   <div class="col-lg-6 col-md-6 col-xs-6">
+       <div class="form-group">
+       <label for="customerName">Description</label>
+         <textarea class="form-control" name="cat-desc"  {{view}}  id="cat-desc" placeholder="Description">{{taskcatdetails.categ_description}}</textarea>
+         </div>
+        </div>  
+ </div>
+ 
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" name="savebutton" class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>    
+              <div class="col-md-3">
+            	<div class="form-group">
+                <a href="{% url 'gridTaskCategory' %}"><button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+              </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+
+	</body>
+</html>

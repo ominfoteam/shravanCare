@@ -1,0 +1,410 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+   <style>
+       .invoice-row {
+    margin-top: 20px;
+}
+.srch-icon{
+        cursor:pointer;
+    }
+    .new-dropdown{
+        background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+    z-index: 1;
+    width: 100%;
+    top:40px;
+    position: absolute;
+    list-style-type:none;
+    padding: 0 !important;
+    }
+    .show {
+    display: block !important;
+}
+.new-dropdown .result1:hover {
+    background: #0069d9;
+    color: #fff;
+}
+.new-dropdown .result1 {
+    color: black;
+    padding: 7px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #343a400d;
+    
+}
+.dispmsg{
+        color:#7F7F7F;
+        display:none;
+    }
+   </style>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Invoice Details</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Invoice Details</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="" method="POST" name="country-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Invoice Details</h3>
+
+          
+          </div>
+  
+           
+           
+            <div class="card-body">
+                <div class="row">
+                   
+              <div class="col-lg-6 col-md-6 col-xs-6">
+          <div class="form-group">
+                    <label for="customerName">Invoice Number </label>
+                    <input type="text" {{view}} class="form-control" name="invoice_no" id="invoice_no" {{disabled}} placeholder="Invoice Number" value="{{invno}}{{invdata.invoiceno}}" required readonly>
+                  </div>
+         </div>
+         <div class="col-lg-3 col-md-3 col-xs-3">
+         <div class="form-group">
+                    <label for="customerName">Invoice Date</label>
+                    <input type="text" {{view}} class="form-control" {{disabled}} value="{{invdate}}{{invdata.invdate}}" name="invoice_date" id="invoice_date"  required readonly>
+                  </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-3">
+         <div class="form-group">
+             <input type="text" class="form-control" name="cust-id" id="cust-id" hidden>
+                    <label for="customerName">Invoice Type</label>
+                    <select name="invoice-type" {{view}} id="invoice-type" {{disabled}} class="form-control custom-select" required> 
+                         	<option value>SELECT OPTION</option>   
+					{% if invdata %}	<option value="Package" {% if invdata.invoicetype == 'Package' %} selected {% endif %} >Package</option> {% endif %}
+						<option value="Non-Package" {% if invdata.invoicetype == 'Non-Package' %} selected {% endif %} >Non Package</option>
+						</select>
+                  </div>
+        </div> 
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+    
+        <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+             <label for="customerName">Customer</label>
+         <input type="text" {{disabled}} class="form-control" {{view}} name="cust-search" value="{% if invdata %}{{invdata.custname}}-{{invdata.custcontact}}{% endif %}" id="cust-search" placeholder="Customer Search" autocomplete="off" >
+         <ul id="my-new-dropdown" class="new-dropdown" style="display:none;">
+                     
+                     
+        </ul>
+        <span class="dispmsg" id="nocustomer" name="nocustomer">There is no customer with this name</span> 
+        <div class="input-group-append">
+            <span class="input-group-text"><i {{disabled}} class="srch-icon fas fa-search"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-3">
+         <div class="form-group" {% if invdata.invoicetype == "Non-Package" %}style="display:none;"{% endif %}  id="start-date-field">
+                   <label for="customerName">Start Date</label>
+                    <input type="date" {{disabled}} class="form-control" {{view}} name="pkg_start_date" id="pkg_start_date" value="{{invdata.startdate}}" readonly>  
+                  </div>
+        </div> 
+        <div class="col-lg-3 col-md-3 col-xs-3">
+         <div class="form-group" {% if invdata.invoicetype == "Non-Package" %}style="display:none;"{% endif %} id="end-date-field">
+                   <label for="customerName">End Date</label>
+                    <input type="date" {{disabled}} class="form-control" {{view}} name="pkg_end_date" id="pkg_end_date" value="{{invdata.enddate}}"  readonly>  
+                  </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-3">
+            <div class="form-group" {% if invdata.invoicetype == "Non-Package" %}style="display:none;"{% endif %} id="end-date-field">
+                      <label for="customerName">Preffered Plan</label>
+                       <input type="text" {{disabled}} class="form-control" {{view}} name="pkg_pref_plan" id="pkg_pref_plan" value="{{invdata.plantype}}"  readonly>  
+                     </div>
+           </div>
+        <div class="col-lg-3 col-md-3 col-xs-3">
+            <div class="form-group" {% if invdata.invoicetype == "Non-Package" %}style="display:none;"{% endif %} id="end-date-field">
+                      <label for="customerName">Preffered Week</label>
+                       <input type="text" {{disabled}} class="form-control" {{view}} name="pkg_pref_week" id="pkg_pref_week" value="{{invdata.preferedweek}}"  readonly>  
+                     </div>
+           </div>
+           <div class="col-lg-3 col-md-3 col-xs-3">
+            <div class="form-group" {% if invdata.invoicetype == "Non-Package" %}style="display:none;"{% endif %} id="end-date-field">
+                      <label for="customerName">Preffered Day</label>
+                       <input type="text" {{disabled}} class="form-control" {{view}} name="pkg_pref_day" id="pkg_pref_day" value="{% if invdata.preferedday == 1 %}Monday{% endif %}{% if invdata.preferedday == 2 %}Tuesday{% endif %}{% if invdata.preferedday == 3 %}Wednesday{% endif %}{% if invdata.preferedday == 4 %}Thursday{% endif %}{% if invdata.preferedday == 5 %}Friday{% endif %}{% if invdata.preferedday == 6 %}Saturday{% endif %}"  readonly>  
+                     </div>
+           </div>
+           <div class="col-lg-3 col-md-3 col-xs-3">
+            <div class="form-group" {% if invdata.invoicetype == "Non-Package" %}style="display:none;"{% endif %} id="end-date-field">
+                      <label for="customerName">Preffered Slot</label>
+                       <input type="text" {{disabled}} class="form-control" {{view}} name="pkg_pref_slot" id="pkg_pref_slot" value="{{invdata.slotid.slotname}}"  readonly>  
+                     </div>
+           </div>
+           <div class="col-lg-3 col-md-3 col-xs-3">
+            <div class="form-group" {% if invdata.invoicetype == "Non-Package" %}style="display:none;"{% endif %} id="end-date-field">
+                      <label for="customerName">Icare Partner Name</label>
+                       <input type="text" {{disabled}} class="form-control" {{view}} name="icarename" id="icarename" value="{{invdata.icareid.user.name}}"  readonly>  
+                     </div>
+           </div>
+ </div>
+ <div class="row">
+    
+ </div>
+ 
+ <div class="row">
+     <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+             <label for="customerName">Customer City</label>
+         <input {{disabled}} type="text" class="form-control" name="cust-city" value="{{invdata.custcity}}"  {{view}} id="cust-city" placeholder="City" readonly >
+         <input {{disabled}} type="hidden" value="{{invdata.custid}}" class="form-control" name="custid" id="custid" readonly >
+         <input {{disabled}} type="hidden" value="{{invdata.custname}}" class="form-control" name="custname" id="custname" readonly >
+         <input {{disabled}} type="hidden" value="{{invdata.custcontact}}" class="form-control" name="custmobile" id="custmobile" readonly >
+         <input {{disabled}} type="hidden" value="{{invdata.eldercontact}}" class="form-control" name="eldercontact" id="eldercontact" readonly >
+         <input {{disabled}} type="hidden" class="form-control" name="elderpin" value="{{invdata.elderpincode}}" id="elderpin" readonly >
+         </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-xs-6">
+     <div class="form-group">
+             <label for="customerName">Elder Name</label>
+         <input {{disabled}} type="text" class="form-control" name="elder-name" value="{{invdata.eldersname}}" {{view}} id="elder-name" placeholder="Elder Name"  readonly>
+         </div>
+         </div>
+         
+         
+ </div>
+ <div class="row">
+      
+         <div class="col-lg-6 col-md-6 col-xs-6">
+     <div class="form-group">
+             <label for="customerName">Customer Address</label>
+         <textarea {{disabled}} class="form-control" name="cust_address" {{view}} id="cust_address" placeholder="Customer Address" readonly>{{invdata.custaddr}}</textarea>
+         </div>
+         </div>
+         <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+             <label for="customerName">Elder Address</label>
+         <textarea {{disabled}} class="form-control" name="elder_address" {{view}} id="elder_address" placeholder="Elder Address" readonly>{{invdata.elderaddr}}</textarea>
+         </div>
+      </div>
+         
+ </div>
+ <div class="row invoice-row">
+     <div class="col-lg-12 col-md-12 col-xs-12">
+         <div class="form-group">
+             <label for="customerName">Description</label>
+         <textarea class="form-control" name="invoice-desc" {{view}} id="invoice-desc" placeholder="Description" rows="3" >{{invdata.invdescribe}}</textarea>
+         </div>
+     </div>
+     </div>
+     <div class="row">
+    
+     <div class="col-lg-3 col-md-3 col-xs-3">
+         <div class="form-group">
+             <label for="customerName">Rate</label>
+             <input type="number" class="form-control" onfocusout="getTot();" {{view}} placeholder="Rate" name="rate" id="rate" min="0" value="{% if invdata %}{{invdata.subtotal}}{% else %}0.00{% endif %}">
+						
+         </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-xs-3">
+         <div class="form-group">
+             <label for="customerName">Other Charges</label>
+             <input type="number" class="form-control" onfocusout="getTot();" {{view}} placeholder="Other Charges" name="other-charge"  id="other-charge" min="0" value="{% if invdata %}{{invdata.othercharges}}{% else %}0.00{% endif %}">
+					
+         </div>
+     </div>
+     <div class="col-lg-3 col-md-3 col-xs-3">
+         <div class="form-group">
+             <label for="customerName">Discount</label>
+             <input type="number" class="form-control" onfocusout="getTot();" {{view}} placeholder="Discount" name="discount"  id="discount" min="0" value="{% if invdata %}{{invdata.discountcharge}}{% else %}0.00{% endif %}">
+					
+         </div>
+     </div>
+     <div class="col-lg-2 col-md-2 col-xs-2">
+         <div class="form-group">
+             <label for="customerName">CSGT(9%)</label>
+             <input type="number" class="form-control" {{view}} placeholder="CGST" name="cgst"  id="cgst" min="0" value="{% if invdata %}{{invdata.cgst}}{% else %}0{% endif %}" readonly>
+					
+         </div>
+     </div>
+     <div class="col-lg-2 col-md-2 col-xs-2">
+         <div class="form-group">
+             <label for="customerName">SSGT(9%)</label>
+             <input type="number" class="form-control" {{view}} placeholder="SGST" name="sgst"  id="sgst" min="0" value="{% if invdata %}{{invdata.sgst}}{% else %}0{% endif %}" readonly>
+						
+         </div>
+     </div>
+     <div class="col-lg-2 col-md-2 col-xs-2">
+         <div class="form-group">
+             <label for="customerName">ISGT(18%)</label>
+             <input type="number" class="form-control" {{view}} placeholder="IGST" name="igst"  id="igst" min="0" value="{% if invdata %}{{invdata.igst}}{% else %}0{% endif %}" readonly>
+				
+         </div>
+     </div>
+     <div class="col-lg-2 col-md-2 col-xs-2">
+         <div class="form-group">
+             <label for="customerName">Round off</label>
+             <input type="number" class="form-control" {{view}} placeholder="Round Off" name="roundoff"  id="roundoff" min="0" value="{% if invdata %}{{invdata.roundoff}}{% else %}0.00{% endif %}" readonly>
+				
+         </div>
+     </div>
+     <div class="col-lg-4 col-md- col-xs-4">
+         <div class="form-group">
+             <label for="customerName">Total Amount</label>
+             <input type="number" class="form-control" {{view}} placeholder="Total Amount" name="total"  id="total" min="0" value="{% if invdata %}{{invdata.totalcharges}}{% else %}0{% endif %}" readonly>
+						
+         </div>
+     </div>
+ </div>
+
+ 
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" {{view}} name="savebutton" class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                    <a href="{% url 'gridInvoice' %}"><button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+              </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+<script>
+
+function getTot(){
+
+document.getElementById("igst").value="";
+document.getElementById("cgst").value="";
+document.getElementById("sgst").value="";
+document.getElementById("roundoff").value="";
+document.getElementById("total").value="";
+var dicountchrge=document.getElementById("discount").value;
+var subcharge=document.getElementById("rate").value;
+var otherchrge=document.getElementById("other-charge").value;
+var gst= (18/100)*(parseInt(subcharge) + parseInt(otherchrge) -parseInt(dicountchrge));
+
+    $('#cgst').val(parseInt(gst)/2); 
+     $('#sgst').val(parseInt(gst)/2); 
+     $('#igst').val(0.00);    
+    
+    
+    
+
+ var totaltemp=parseInt(subcharge) + parseInt(otherchrge) - parseInt(dicountchrge) + parseFloat(gst);
+
+var mod = (totaltemp % 10).toFixed(2);
+
+
+var roundoff= Math.round(totaltemp) - totaltemp;
+
+
+var finaltot=totaltemp + roundoff;
+ $('#roundoff').val(roundoff.toFixed(2));
+
+ $('#total').val(finaltot); 
+
+}
+
+    function getCustomerDetails(custid,custname,custmobile,custaddr,custcity,custparentsaddr,custparents,eldercontact,elderpincode){
+
+     
+     $("#nocustomer").hide();
+    //$("#my-new-dropdown").hide();
+    document.getElementById("my-new-dropdown").classList.toggle("show");
+ 
+    document.getElementById("cust-search").value = custname+" - "+custmobile;
+    		 document.getElementById("custid").value = custid;
+                 document.getElementById("custname").value = custname;
+                 document.getElementById("custmobile").value = custmobile;
+				 document.getElementById("cust-city").value=custcity;
+                 document.getElementById("elder-name").value=custparents;
+                 document.getElementById("cust_address").value=custaddr;
+                 document.getElementById("elder_address").value=custparentsaddr;
+
+                 document.getElementById("eldercontact").value=eldercontact;
+                 document.getElementById("elderpin").value=elderpincode;
+				
+ }
+$('body').on('click', 'i.srch-icon', function(e) {
+       var datamain=document.getElementById("cust-search").value;
+    $("#nocustomer").hide();
+    $("#my-new-dropdown").hide();
+    $.ajax({
+                type:'GET',
+                url:'custSearch/'+datamain,
+                success:function(html){
+				
+				$("#my-new-dropdown").empty();
+				if(html != "No Such Customer"){
+				
+                    var tempdrop='';              
+for (var key in html.cust) {   
+    var custid=html.cust[key].custid;
+    var custname=html.cust[key].name;
+    var custmob=html.cust[key].custmobile;
+    var custaddress=html.cust[key].custaddr;
+    var custcit=html.cust[key].custcity;
+    var custparentaddress=html.cust[key].parentsaddr;
+    var custparentsnames=html.cust[key].custparents;
+  tempdrop += '<span class="result1" onclick=getCustomerDetails('+custid+',\"'+custname+'"\,\"'+custmob+'"\,\"'+custaddress+'"\,\"'+custcit+'"\,\"'+custparentaddress+'"\,\"'+custparentsnames+'"\,'+html.cust[key].eldercontact+','+html.cust[key].elderpincode+');><li >'+custname+'-'+custmob+'</li></span>';
+  
+}
+
+                $("#my-new-dropdown").html(tempdrop);
+                document.getElementById("my-new-dropdown").classList.toggle("show");
+            }else{
+                 $("#nocustomer").show();
+
+                }
+                }
+            });
+ });
+
+    $("#invoice-type").change(function () {
+       if ($(this).val() == "Package") {
+           $("#start-date-field").show();
+           $("#end-date-field").show();
+       }
+       else{
+          $("#start-date-field").hide();
+           $("#end-date-field").hide(); 
+       }
+    });
+</script>
+	</body>
+</html>

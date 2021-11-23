@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Schedule</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="shravancare_dashboard_frame.html">Home</a></li>
+              <li class="breadcrumb-item active">Schedule</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="#" method="POST" name="city-form" enctype="multipart/form-data">
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Schedule</h3>
+
+          
+          </div>
+  
+           
+           
+            <div class="card-body">
+                <div class="row">
+                   
+              <div class="col-lg-5 col-md-5 col-xs-5">
+          <div class="form-group">
+                <label for="inputStatus">Icare Partner</label>
+                <select class="form-control custom-select" name="icare-partner" id="icare-partner" required>
+           <option value>SELECT PARTNER</option>         
+          <option value="1">Nigel</option>
+<option value="2">Harshal</option>
+          </select>
+              </div>
+         </div>
+         <div class="col-lg-5 col-md-5 col-xs-5">
+          <div class="form-group">
+                <label for="inputStatus">Date</label>
+                 <input type="date" class="form-control" name="schedule_date" id="schedule_date"  required >
+              </div>
+         </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+                   
+              <div class="col-lg-10 col-md-10 col-xs-10">
+          <div class="form-group">
+                <label for="inputStatus">Slots</label>
+              </div>
+         </div>
+         
+       
+        	
+              
+ </div>
+ <div class="row">
+   <div class="col-lg-10 col-md-10 col-xs-10">
+         <table class="table table-hover text-nowrap center table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Slot</th>
+                      <th>Time</th>
+                      <th>Customer</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Slot 1</td>
+                      <td>9.30 A.M to 11.30 A.M</td>
+                      <td><input type="text" class="form-control" name="slot_for_cust" id="slot_for_cust1"  autocomplete="off" ></td>
+                    </tr>
+                   <tr>
+                      <td>Slot 2</td>
+                      <td>12.00 P.M to 2.00 P.M</td>
+                      <td><input type="text" class="form-control" name="slot_for_cust" id="slot_for_cust2"  autocomplete="off" ></td>
+                    </tr>
+                    <tr>
+                      <td>Slot 3</td>
+                      <td>3.00 P.M to 5.00 P.M</td>
+                      <td><input type="text" class="form-control" name="slot_for_cust" id="slot_for_cust3"  autocomplete="off" ></td>
+                    </tr>
+                    <tr>
+                      <td>Slot 4</td>
+                      <td>5.30 P.M to 7.30 P.M</td>
+                      <td><input type="text" class="form-control" name="slot_for_cust" id="slot_for_cust4"  autocomplete="off" ></td>
+                    </tr>
+                  </tbody>
+                </table>
+        </div>  
+        
+ </div>
+ 
+ 
+ 
+ <div class="box-footer">
+                   
+              <div class="row">
+                 
+                                  <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" id="savebutton" name="savebutton" class="btn btn-block btn-primary">Submit</button>
+              </div>
+              </div>            <div class="col-md-3">
+            	<div class="form-group">
+                <button type="button" class="btn btn-block btn-secondary" onclick="location.href='shravancare_dashboard_frame.html';">Exit</button>
+              </div>
+            </div>
+           
+            </div>  </div>
+ 
+        </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+	</body>
+</html>

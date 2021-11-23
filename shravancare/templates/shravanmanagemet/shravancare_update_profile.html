@@ -1,0 +1,739 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Shravancare</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+    <link rel="stylesheet" href=" plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/website-style.css' %}">
+   <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+  <!--<link rel="stylesheet" href="{% static 'css/slick.css">-->
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{% static 'plugins/select2/css/select2.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/css/intlTelInput.css" rel="stylesheet" media="screen">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<style>
+    input#files-count {
+    border: 0;
+    text-align:center;
+    background:#ECF6FF;
+}
+.select2-container--default .select2-selection--multiple{
+    border-radius:0;
+}
+.span-label{
+  width:62%;
+  float:right;  
+}
+@media only screen and (max-width: 768px) {
+   .span-label{
+  float:unset;  
+} 
+}
+</style>
+</head>
+<body>
+    <nav class="container navbar navbar-expand-sm">
+  <a href="index.html" ><img src="{% static 'img/Shravancare-Square-Logo.png' %}" class="logo" alt="shravancare-logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-2" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar-list-2">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#what-we-do">What We Do</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#pricing">Plans & Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#testimonial">Testimonials</a>
+      </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#about">About Us</a>
+      </li>
+       <!--<li class="nav-item">
+        <a class="nav-link" href="#vision-mission">Vision & Mission</a>
+      </li>-->
+      <li class="nav-item">
+        <a class="nav-link" href="#why-us">Why Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#icare-partner">Partners</a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li class="only-width nav-item dropdown" id="user-dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:#00529C;">
+        {{request.session.name}}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="my-item dropdown-item" href="myprofile" target="_blank">Update Profile</a>
+          <a class="my-item dropdown-item" href="#" data-toggle="modal" data-target="#transaction-modal">Past Transaction</a>
+          <a class="my-item dropdown-item" href="#" data-toggle="modal" data-target="#visits-modal">Visits</a>
+            <a class="my-item dropdown-item" href="logout_frontend" id="logout">Logout</a>
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+
+    {% if request.user.is_authenticated %}
+    {% else %}
+    <div class="login-register" id="login-register">
+  <a  href="" data-toggle="modal" data-target="#login-modal" class="blue-text">Login</a> | <a href="" data-toggle="modal" data-target="#registration-modal" class="blue-text">Register</a>
+  </div>{% endif %}
+  </div>
+</nav>
+   <section class="update-profile">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="profile-head">Profile</h2>
+                <h4 class="profile-subhead">Update Your Profile</h4>
+            </div>
+            <div class="col-md-6">
+<div class="btn-group float-right">
+  <button class="show-own-details own-btn active">Own Details</button>
+  <button class="show-elder-details own-btn ">Elder Details</button>
+</div>
+            </div>
+        </div>
+        <form action="myProfile" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST">
+            <div class="client-section">
+                <div class="form-group">
+                <label for="inputName" class="label-color">Name</label>
+                <input type="text" name="cli-name" id="cli-name" class="myinput form-control" required value="{{customer.name}}">
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="label-color">Email</label>
+                <input type="email" onfocusout="checkEmail(this)" name="cli-email" id="cli-email" class="myinput form-control" disabled required value="{{customer.user.email}}">
+                <small class="text-danger"></small>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="label-color">Mobile Number</label>
+                <input id="cli-mob" name="cli-mob" type="tel" class="myinput form-control" required value="{{customer.mobile}}">
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="label-color">Address</label>
+                <textarea class="myinput form-control" id="cli-addr" name="cli-addr" rows="3"  required>{{customer.address}}</textarea>
+              </div>
+              <div class="form-row">
+            <div class="form-group col-md-4">
+    <label for="exampleInputEmail1" class="label-color">Country</label>
+    <select class="myinput form-control custom-select" id="cli-country" name="cli-country" required="">
+      <option value="">SELECT COUNTRY</option>
+      {% for countries in country %}        
+      <option value="{{countries.id}}" {% if customer.country.id == countries.id %} selected {% endif %}  >{{countries.country_name}}</option>
+      {% endfor %}
+                </select>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="exampleInputEmail1" class="label-color">State</label>
+    <select class="myinput form-control custom-select" id="cli-state" name="cli-state" required="">
+    
+      {% for states in state %}        
+      <option value="{{states.id}}" {% if customer.state.id == states.id %} selected {% endif %}  >{{states.state_name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="exampleInputEmail1" class="label-color">City</label>
+    <select class="myinput form-control custom-select" id="cli-city" name="cli-city" required="">
+   
+      {% for cities in city %}        
+      <option value="{{cities.id}}" {% if customer.city.id == cities.id %} selected {% endif %}  >{{cities.city_name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  </div>
+  <div class="form-group">
+                <label for="inputName" class="label-color">Passport Number</label>
+                <input type="text" name="passport" id="cli-passport" class="myinput form-control" Placeholder="Passport Number"  required value="{{customerpassport.passportnumber}}">
+              </div>
+              <div class="form-row">
+                 <div class="form-group col-md-6">
+    <!--<label for="exampleInputEmail1" class="label-color">City</label>-->
+    <div class="image-upload-wrap">
+    <input class="file-upload-input" type="file" id="file-upload-input" name="cust-profile-upload-input" accept="image/*" onchange="uploadFile(this)">
+    <div class="drag-text">
+      <img src="{% static 'img/picture.png' %}">
+      <h5 class="file-upload-text">Upload your profile picture</h5>
+      
+      <input type="text" name="files-count" id="files-count">
+    </div>
+  </div>
+  </div> 
+  <div class="form-group col-md-6">
+    <!--<label for="exampleInputEmail1" class="label-color">City</label>-->
+    <div class="image-upload-wrap">
+    <input class="file-upload-input" onchange="uploadFile(this)" type="file" id="file-upload-input1" name="cust-passport-upload-input" accept="image/*">
+    <div class="drag-text">
+      <img src="{% static 'img/passport.png' %}">
+      <h5 class="file-upload-text">Upload your passport image</h5>
+      
+      <input type="text" name="files-count" id="files-count">
+    </div>
+  </div>
+  </div> 
+              </div>
+            </div>
+            <div class="elder-section" style="display:none;">
+              {% for elder in eldernames %}
+                <div class="form-row">
+            <div class="form-group col-md-4">
+    <label for="exampleInputEmail1" class="label-color">Name</label>
+    <input type="text" class="myinput form-control" id="elder-name" name="elder-name[]" required value={{elder.parent_name}}>
+  </div>
+  <div class="form-group col-md-4">
+    <label for="exampleInputEmail1" class="label-color">Age</label>
+    <input type="text" class="myinput form-control" id="elder-age" name="elder-age[]" onkeypress="return isNumber(event)" required value="{{elder.age}}">
+  </div>
+  <div class="form-group col-md-4">
+    <label for="exampleInputEmail1" class="label-color">Gender</label>
+    <select class="myinput form-control custom-select" id="elder-gender" name="elder-gender[]" required>
+      <option val>Select Gender</option>
+      <option value="Male" {% if elder.gender == "Male" %}selected{% endif %}>Male</option>
+      <option value="Female" {% if elder.gender == "Female" %}selected{% endif %}>Female</option>
+      <option value="Others" {% if elder.gender == "Others" %}selected{% endif %}>Others</option>
+    </select>
+  </div>
+  </div>
+  <div class="form-group">
+                <label for="inputName" class="label-color">Aadhar Number</label>
+                <input id="elder-aadharno" name="elder-aadharno[]" type="text" class="myinput form-control" onfocusout="checkAadhar(this)" onkeypress="return isNumber(event)" Placeholder="Aadhar Number" required value="{{elder.adhaarnumber}}">
+                <small class="text-danger"></small>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+    <span class="span-label">Upload Elder Profile Picture & Aadhar Card</span>
+  </div>
+  <div class="form-group col-md-3">
+    <div class="image-upload-wrap">
+    <input class="file-upload-input" type="file" id="file-upload-input" name="elder-profile-upload-input[]" accept="image/*" onchange="uploadFile(this)">
+    <div class="drag-text">
+      <img src="{% static 'img/picture.png' %}" >
+      
+      <input type="text" name="files-count[]" id="files-count" style="width:60%; font-size:10px;">
+    </div>
+  </div>
+  </div>
+  <div class="form-group col-md-3">
+    <div class="image-upload-wrap">
+    <input class="file-upload-input" onchange="uploadFile(this)" type="file" id="file-upload-input" name="elder-adhaar-upload-input[]" accept="image/*">
+    <div class="drag-text">
+      <img src="{% static 'img/Aadhaar_card_PNG_Icon.png' %}" style="width:38%;">
+      
+      <input type="text" name="files-count[]" id="files-count" style="width:60%; font-size:10px;">
+    </div>
+  </div>
+  </div>
+              </div>
+       
+              {% endfor %}
+    <!--<div id="newRow"></div>
+    <div class="row">
+      <div class="col-md-12">
+  <div class="form-group">
+          <div class="add-elder">
+    <span style="color:#00529C;padding-right:10px;">Add Elder</span><button class="elder-btn btn btn-outline-primary" id="elder-btn"><i class="fas fa-plus"></i></button>
+    </div>
+  </div>
+  </div>
+  </div>-->
+  <div class="form-group">
+                <label for="inputName" class="label-color">Mobile Number</label>
+                <input type="text" onfocusout="checkmob(this)" name="elder-mob" id="elder-mob" onkeypress="return isNumber(event)" class="myinput form-control"  required value="{{parentsdets.mobile}}" Placeholder="Mobile Number">
+                <small class="text-danger"></small>
+              </div>
+  <div class="form-group">
+                <label for="inputName" class="label-color">Address</label>
+                <textarea class="myinput form-control" id="elder-addr" name="elder-addr" rows="3"  required Placeholder="Address">{{parentsdets.address}}</textarea>
+              </div>
+              <div class="form-row">
+            <div class="form-group col-md-3">
+    <label for="exampleInputEmail1" class="label-color">Country</label>
+    <select class="myinput form-control custom-select" id="elder-country" name="elder-country" required="">
+      <option value="">SELECT COUNTRY</option>
+      {% for countries in country %}        
+      <option value="{{countries.id}}" {% if parentsdets.country.id == countries.id %} selected {% endif %}  >{{countries.country_name}}</option>
+      {% endfor %}
+                </select>
+  </div>
+  <div class="form-group col-md-3">
+    <label for="exampleInputEmail1" class="label-color">State</label>
+    <select class="myinput form-control custom-select" id="elder-state" name="elder-state" required="">
+      {% for states in state1 %}        
+      <option value="{{states.id}}" {% if parentsdets.state.id == states.id %} selected {% endif %}  >{{states.state_name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group col-md-3">
+    <label for="exampleInputEmail1" class="label-color">City</label>
+    <select class="myinput form-control custom-select" id="elder-city" name="elder-city" required >
+      {% for cities in city1 %}        
+      <option value="{{cities.id}}" {% if parentsdets.city.id == cities.id %} selected {% endif %}  >{{cities.city_name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group col-md-3">
+    <label for="exampleInputEmail1" class="label-color">Pincode</label>
+    <select class="myinput form-control custom-select" id="elder-pincode" name="elder-pincode" required="">
+      {% for pincodes in pincode %}        
+      <option value="{{pincodes.id}}" {% if parentsdets.pincode.id == pincodes.id %} selected {% endif %}  >{{pincodes.pincode_no}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  </div>
+  <div class="form-group">
+                <label for="inputName" class="label-color">Medical/Other Instruction</label>
+                <textarea class="myinput form-control" id="med-inst" name="med-inst" rows="3" Placeholder="Medical / Other Instruction">{{parentsdets.description}}</textarea>
+              </div>
+             
+                <div class="form-group" style="padding-top:15px;">
+                    <button type="sumit" class="updt-profile-btn btn btn-primary btn-block" id="updt-profile-btn">SUBMIT</button>
+                </div>
+  
+            </div>
+            </form>
+            </div>
+        </div>
+      </form>
+    </div>
+</section>
+    <footer class="site-footer">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-3">
+                <img src="{% static 'img/White-logo.png' %}" class="footer-logo">
+                <p class="foot-about">Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br> sed do eiusmod tempor<br> incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-heading">Contact</h4>
+                <div class="contact-info">
+                    <ul>
+                         <li><i class="fas fa-map-marker-alt"></i><span>0506, ABC street,<br> oldtown, Mumbai, MH</span></li>
+                        <li><i class="fas fa-phone-alt"></i><span>+91 9876543210</span></li>
+                        <li><i class="fas fa-envelope"></i><span>info@shravancare.in</span></li>
+                       
+                            </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-heading">All Links</h4>
+                <div class="contact-info">
+                    <ul>
+                         <a href="#what-we-do" class="links"><li class="links">What We Do</li></a>
+                         <a href="#pricing" class="links"><li class="links">Plan & Pricing</li></a>
+                         <a href="#testimonial" class="links"><li class="links">Client Reviews</li></a>
+                         <a href="#about" class="links"><li class="links">About Us</li></a>
+                         <a href="#why-us" class="links"><li class="links">Why Us</li></a>
+                         <a href="#icare-partner" class="links"><li class="links">Partners</li></a>
+                       </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-heading">Follow Us</h4>
+                <div class="contact-info">
+                    <ul class="d-flex flex-wrap align-items-center">
+                                <li><a href="#"><i class="my-icon fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="my-icon fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="my-icon fab fa-instagram"></i></a></li>
+                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="copy-right">Copyrights 2020. All rights reserved by, Shravancare</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+   <script src="{% static 'js/slick.js' %}"></script>
+   <script src="{% static 'js/lightbox.js' %}"></script>
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+   <!--<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js" ></script>
+   <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js" ></script>
+   <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js" ></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js" ></script>-->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<!-- Select2 -->
+<script src="{% static 'plugins/select2/js/select2.full.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/intlTelInput.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"></script>
+<script>
+     $(document).ready(function() {
+$(".own-btn").click(function () {
+    $(".own-btn").removeClass("active");
+    // $(".tab").addClass("active"); // instead of this do the below 
+    $(this).addClass("active");   
+});
+});
+
+function checkEmail(obj1){
+    if(obj1.value !=""){
+        var cemailid = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(obj1.value.match(cemailid))
+        {
+            $(obj1).removeClass("is-invalid"); 
+       $(obj1).next().text("");
+      return true;
+        }
+        else{
+           $(obj1).addClass("is-invalid");      
+      
+        $(obj1).next().text("Please enter a valid Email ID");
+        return false; 
+        }
+    }
+}
+function checkAadhar(obj2){
+    if(obj2.value !=""){
+        var eaadharno = /^\d{12}$/;
+        if(obj2.value.match(eaadharno))
+        {
+            $(obj2).removeClass("is-invalid"); 
+       $(obj2).next().text("");
+      return true;
+        }
+        else{
+           $(obj2).addClass("is-invalid");      
+      
+        $(obj2).next().text("Please enter a valid Aadhar No!!");
+        return false; 
+        }
+    }
+}
+function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+
+  return true;
+}
+function checkmob(obj){
+    if(obj.value != ""){
+     var phoneno = /^\d{10}$/;
+    
+  if(obj.value.match(phoneno))
+   {
+       // console.log("jj");
+      $(obj).removeClass("is-invalid"); 
+       $(obj).next().text("");
+      return true;
+        }
+      else
+        {
+           //  console.log("tt");
+       $(obj).addClass("is-invalid");      
+      
+        $(obj).next().text("Mobile No must be 10 digit long");
+        return false;
+        }
+}
+}
+/*$(document).on('change','#file-upload-input', function(){
+        var names = [];
+        var length = $(this).get(0).files.length;
+          for (var i = 0; i < $(this).get(0).files.length; ++i) {
+              names.push($(this).get(0).files[i].name);
+          }
+          var fileName = names.join(', ');
+          if(length > 1){$(this).closest('.form-group').find('#files-count').attr("value",length+" files selected");}
+          else{$(this).closest('.form-group').find('#files-count').attr("value",length+" file selected");}
+         
+     });
+     $(document).on('change','#file-upload-input1', function(){
+        var names = [];
+        var length = $(this).get(0).files.length;
+          for (var i = 0; i < $(this).get(0).files.length; ++i) {
+              names.push($(this).get(0).files[i].name);
+          }
+          var fileName = names.join(', ');
+          if(length > 1){$(this).closest('.form-group').find('#files-count').attr("value",length+" files selected");}
+          else{$(this).closest('.form-group').find('#files-count').attr("value",length+" file selected");}
+     });*/
+     function uploadFile(obj5){
+         //alert("hii");
+         var names = [];
+        var length = $(obj5).get(0).files.length;
+          for (var i = 0; i < $(obj5).get(0).files.length; ++i) {
+              names.push($(obj5).get(0).files[i].name);
+          }
+          $(obj5).closest('.form-group').find('#files-count').attr("value",length+" file selected");
+     }
+</script>
+<script>
+    $(document).ready(function(){
+        $(".show-elder-details").click(function(){
+            $(".client-section").hide();
+            $(".elder-section").show();
+            
+        });
+        $(".show-own-details").click(function(){
+            $(".elder-section").hide();
+            $(".client-section").show();
+            
+        });
+        
+    });
+</script>
+<script>
+        // add row
+        $("#elder-btn").click(function () {
+            var html = '';
+            html += '<div class="form-row">';
+            html += '<div class="form-group col-md-4">';
+            html += '<input type="text" class="myinput form-control" id="elder-name" placeholder="Name">';
+            html += '</div>';
+            html += '<div class="form-group col-md-4">';
+             html += '<input type="text" class="myinput form-control" onkeypress="return isNumber(event)" oninput="validateForm()" id="elder-age"  placeholder="Age " required>';
+              html += '</div>';
+              html += '<div class="form-group col-md-4">';
+             html += '<select class="myinput form-control custom-select" id="elder-gender"  required="">'
+     html += '<option value "">Select gender</option>'
+     html += '<option value="Male">Male</option>'
+     html += '<option value="Female">Female</option>'
+     html += '<option value="Others">Others</option>'
+    html +=  '</select>';
+              html += '</div>';
+    html += '<div class="form-group col-md-12">';
+     html += '<input id="elder-aadharno" name="elder-aadharno" type="text" class="myinput form-control" onfocusout="checkAadhar(this)" onkeypress="return isNumber(event)" Placeholder="Aadhar No" required="">';
+      html += '<small class="text-danger"></small>';
+       html += '</div>';
+       html += '<div class="form-group col-md-6">';
+        html += '<span style="width:62%; float:right;">Upload Elder Profile Picture & Aadhar Card</span>';
+        html += '</div>';
+         html += '<div class="form-group col-md-3">';
+         html += '<div class="image-upload-wrap">';
+         html += '<input class="file-upload-input" type="file" id="file-upload-input" accept="image/*">';
+        html += '<div class="drag-text">';
+        html += '<img src="{% static "img/picture.png" %}">';
+        html += '<input type="text" name="files-count" id="files-count" style="width:50%;">';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="form-group col-md-3">';
+         html += '<div class="image-upload-wrap">';
+         html += '<input class="file-upload-input" type="file" id="file-upload-input" accept="image/*">';
+        html += '<div class="drag-text">';
+        html += '<img src="{% static "img/Aadhaar_card_PNG_Icon.png" %}" style="width:36%;">';
+        html += '<input type="text" name="files-count" id="files-count" style="width:50%;">';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        
+       
+    
+    html += '<div class="form-group col-md-3">';
+    html += '<span style="color:#00529C;padding-right:10px;">Remove</span><button id="removeRow" type="button" class="remove-btn btn btn-outline-primary"><i class="fas fa-times"></i></button>';
+                html += '</div>';
+                html += '</div>';
+
+            $('#newRow').append(html);
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function () {
+            $(this).closest('.form-row').remove();
+        });
+        
+$(document).ready(function(){        
+     $('.select2').select2();
+  });
+</script>
+<script>
+    
+var telInput = $("#cli-mob"),
+  errorMsg = $("#error-msg"),
+  validMsg = $("#valid-msg");
+
+// initialise plugin
+telInput.intlTelInput({
+
+  allowExtensions: true,
+  formatOnDisplay: true,
+  autoFormat: true,
+  autoHideDialCode: true,
+  autoPlaceholder: true,
+  defaultCountry: "auto",
+  ipinfoToken: "yolo",
+
+  nationalMode: false,
+  numberType: "MOBILE",
+  //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+  preferredCountries: [ 'ae','us','sg','gb'],
+  preventInvalidNumbers: true,
+  separateDialCode: true,
+  initialCountry: "auto",
+  geoIpLookup: function(callback) {
+  $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+    var countryCode = (resp && resp.country) ? resp.country : "";
+    callback(countryCode);
+  });
+},
+   utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.9/js/utils.js"
+});
+
+var reset = function() {
+  telInput.removeClass("error");
+  errorMsg.addClass("hide");
+  validMsg.addClass("hide");
+};
+
+// on blur: validate
+telInput.blur(function() {
+  reset();
+  if ($.trim(telInput.val())) {
+    if (telInput.intlTelInput("isValidNumber")) {
+      validMsg.removeClass("hide");
+    } else {
+      telInput.addClass("error");
+      errorMsg.removeClass("hide");
+    }
+  }
+});
+
+// on keyup / change flag: reset
+telInput.on("keyup change", reset);
+
+
+
+</script>
+<script>
+  $("#cli-country").change(function () {
+      const url = "{% url 'load_state' %}"
+      const countryId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'country_id': countryId   
+          },
+          success: function (data) {  
+              $("#cli-state").html(data); 
+              var selectcity = $('#cli-city');
+              selectcity.empty().append('<option value="">---Select State---</option>');
+
+          }
+      });
+
+  });
+
+
+  $("#cli-state").change(function () {
+      const url = "{% url 'load_city' %}"
+      const stateId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'state_id': stateId   
+          },
+          success: function (data) {  
+              $("#cli-city").html(data); 
+            
+          }
+      });
+
+  });
+
+  $("#elder-country").change(function () {
+      const url = "{% url 'load_state' %}"
+      const countryId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'country_id': countryId   
+          },
+          success: function (data) {  
+              $("#elder-state").html(data); 
+              var selectcity = $('#elder-city');
+              selectcity.empty().append('<option value="">---Select State---</option>');
+var selectpincode = $('#elder-pincode');
+selectpincode.empty().append('<option value="">---Select State---</option>');
+          }
+      });
+
+  });
+
+
+  $("#elder-state").change(function () {
+      const url = "{% url 'load_city' %}"
+      const stateId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'state_id': stateId   
+          },
+          success: function (data) {  
+              $("#elder-city").html(data); 
+              var selectpincode = $('#elder-pincode');
+selectpincode.empty().append('<option value="">---Select City---</option>');
+          }
+      });
+
+  });
+
+  $("#elder-city").change(function () {
+      const url = "{% url 'load_pincodes' %}"
+      const cityId = $(this).val();  
+      //alert(cityId) 
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'city_id': cityId  ,
+              'temp':cityId 
+              
+          },
+          success: function (data) {  
+              $("#elder-pincode").html(data); 
+             
+          }
+      });
+
+  });
+</script>
+</body>
+</html>
+    
+</body>

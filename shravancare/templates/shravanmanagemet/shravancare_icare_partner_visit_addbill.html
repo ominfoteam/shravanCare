@@ -1,0 +1,646 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Shravancare</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="{% static 'css/slick.css' %}">-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <style>
+    .page-container{
+        height:unset;
+    }
+    .container{
+        max-width:600px;
+        padding-left: 0;
+      padding-right: 0;
+      overflow-x: hidden !important;
+      height:unset;
+    } 
+    body {
+      font-family: 'Poppins', sans-serif;
+      background:#F9F9F9;
+      margin-bottom:50px;
+  }
+  .card{
+      border-bottom:0;
+      border-left:unset;
+      border-right:unset;
+      border-top:0;
+  }
+  .card-body{
+      background:#F9F9F9;
+  }
+    .card-header{
+        background:#00529C;
+        height:70px;
+       display: inline-flex;
+      align-items: center;
+      justify-content: start;
+      border-radius: 0 !important;
+    }
+    .header-title{
+        font-size:18px;
+        color:#fff;
+        margin-bottom: 0;
+      padding-left: 10px;
+    }
+    .arrow-icon{
+        color:#fff;
+    }
+    .no-bill-img{
+        max-width:100%;
+        height:auto;
+        display: block;
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .nobill-text{
+        font-size:16px;
+        color:#000;
+        font-weight:600;
+    }
+    .start-btn{
+        background:#00529C;
+        color:#fff;
+        border-color:#00529C;
+    }
+     .start-btn:hover{
+        color:#00529C;
+        background:#fff;
+        border-color:#00529C;
+    }
+    .start-btn:focus{
+        box-shadow:none;
+    }
+    .footer{
+       position: fixed;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+      background:#f9f9f9;
+    }
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }  
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  .file-btn {
+      background: #00529C;
+  }
+  .upload-icon{
+      color:#fff;
+  }
+  .save-next-area{
+      margin-top:20px;
+  }
+  .next-btn{
+      border-color:#00529C;
+      color:#00529C;
+  }
+  .next-btn:hover{
+      border-color:#00529C;
+      color:#fff;
+      background:#00529C;
+  }
+  .next-btn:focus{
+      box-shadow:none;
+  }
+  .prev-btn{
+      border-color:#00529C;
+      color:#00529C;
+  }
+  .prev-btn:focus{
+      box-shadow:none;
+  }
+  .prev-btn:hover{
+      border-color:#00529C;
+      color:#fff;
+      background:#00529C;
+  }
+  .bill-block{
+      border-radius: 10px;
+      background: #fff;
+     padding: 15px 10px 10px 10px;
+      margin: 8px 0;
+      /*box-shadow: 0 1px 2px rgb(0 0 0 / 19%), 0 1px 3px rgb(0 0 0 / 23%);*/
+      -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+  }
+  .mob-view{
+      width:50%;
+  }
+  .bill-name {
+      font-size: 15px;
+      padding-top: 5px;
+  }
+  .bill-check{
+      float:right;
+  }
+  .tab{
+      display:none;
+  }
+  .confirm-question{
+      font-size:18px;
+      color:#000;
+      font-weight:400;
+      text-align:center;
+      margin-bottom: 40px;
+  }
+  .btn-row{
+      margin-top:20px;
+  }
+  .yes-btn{
+    border-color:#00529C;
+    color:#00529C;  
+  }
+  .yes-btn:hover{
+      border-color:#00529C;
+      color:#fff;
+      background:#00529C;
+  }
+  .yes-btn:focus{
+      box-shadow:none;
+  }
+  .no-btn{
+    border-color:#00529C;
+    color:#fff;  
+    background:#00529C
+  }
+  .no-btn:hover{
+      border-color:#00529C;
+      color:#00529C;
+      background:#fff;
+  }
+  .no-btn:focus{
+      box-shadow:none;
+  }
+  .no-btn-btn{
+    border-color:#00529C;
+    color:#fff;  
+    background:#00529C
+  }
+  .no-btn-btn:hover{
+      border-color:#00529C;
+      color:#00529C;
+      background:#fff;
+  }
+  .no-btn-btn:focus{
+      box-shadow:none;
+  }
+  
+    .tab {
+        animation: fadeIn linear 1s;
+    -webkit-animation: fadeIn linear 1s;
+    -moz-animation: fadeIn linear 1s;
+    -o-animation: fadeIn linear 1s;
+    -ms-animation: fadeIn linear 1s;}
+    @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+   .modal-title{
+      color:#00529C; 
+   } 
+   .checkbox {
+    float:right;
+  }
+  .checkbox label {
+    display: inline;
+  }
+  .checkbox .input-assumpte {
+    display: none;
+  }
+  .input-assumpte + label:after {
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    transition-duration: 0.3s;
+    width: 16px;
+    height: 16px;
+    content: '';
+    margin-left: 10px;
+    background: 50%/50% 50% no-repeat;
+  }
+  .input-assumpte:checked + label:after {
+    background-color: #3D9F15;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E");
+  }
+  .input-assumpte.change-color:checked + label:after {
+      background-color: #FFC72F;
+  }
+  .i-icon {
+      margin-left: 10rem;
+  }
+  @media only screen and (max-width: 768px) {
+    .i-icon {
+      margin-left: 5rem;
+  }  
+  }
+  input#files-count {
+      border: 0;
+  }
+  
+    </style>
+  </head>
+  <body>
+      <div class="page-container container">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header">
+                           <i class="arrow-icon fas fa-arrow-left" id="abc" onclick="goBack()"></i><h4 class="header-title">Bills Paid</h4>
+                      </div>
+                        <div class="card-body">
+                            <form id="task-form">
+                                <!--
+                                    ''.join(s.split()).lower()
+                                -->
+                                {% for categ in categs %}
+                                <div class="{{categ.categName|cut:' '|lower }}-tab tab">
+                                    <input type="hidden" value="{{ forloop.counter }}" name="tabno" id="tabno">
+                                    {% for task in tasks %}
+                                    {% if task.categ_id.id == categ.id %}
+                                <div class="bill-block" >
+                                    <div class="row">
+                                        <div class="mob-view col-md-6" data-toggle="modal" data-taskid="{{task.id}}" data-question="{{task.question}}" data-taskdue="{{task.is_due}}" data-target="#yes-no-modal">
+                                            <h4 class="bill-name">{{task.taskName}}</h4>
+                                        </div>
+                                        <div class="mob-view col-md-6">
+                                            <i class="i-icon fas fa-info-circle" style="display:none;" id="i-icon" data-toggle="modal" data-target="#add-bill"></i>
+                                            
+                                            <div class="checkbox">
+  <input type="checkbox" class="input-assumpte" id="{{categ.categName|cut:' '|lower }}-{{task.taskName|cut:' '|lower }}-check" >
+  <label for="input-confidencial"></label>
+</div>
+                                            <!--<div class="form-check">
+  <input class="bill-check form-check-input position-static" type="checkbox" id="mtnl_bill_check" value="option1"  aria-label="...">
+</div>-->
+                                    </div>
+                                </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            
+                                </div>
+                               {% endfor %}
+                            </form>
+                           
+                           
+                        </div>
+                         
+                  </div>
+              </div>
+          </div>
+      </div>
+       <footer class="container footer">
+                                 <div class="save-next-area d-flex align-items-center">
+                                     <button type="button" onclick="nextPrev(-1)" id="prevBtn" class="prev-btn btn btn-outline-primary"  style="width:28%;">PREVIOUS</button>
+                                     <div class="d-flex justify-content-end align-items-center ml-auto" >
+                                         <span id="currenttabno" style="padding-right: 5px;">01 </span> of 06
+                                     </div>
+                                     <button type="button" class="next-btn btn btn-outline-primary ml-auto" id="nextBtn" onclick="nextPrev(1)" style="width:28%;" >NEXT</button>
+                                 </div>
+                            </footer>
+                            
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+      <div class="modal fade" id="add-bill" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:unset;">
+        <h5 class="modal-title" id="exampleModalLongTitle">Bill Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     
+      <div class="modal-body">
+     
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Amount</label>
+    <div class="col-sm-10">
+      <input type="hidden" class="form-control" id="finaltaskid" name="finaltaskid">
+      <input type="number" class="form-control" id="finaltaskamount" name="finaltaskamount" >
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Remarks</label>
+    <div class="col-sm-10">
+      <textarea class="form-control"  id="finaltaskremark" name="finaltaskremark"  rows="3"></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Upload Photo</label>
+    <div class="col-sm-10">
+      <div class="upload-btn-wrapper">
+  <button class="file-btn btn"><i class="upload-icon fas fa-plus-circle"></i></button>
+  <input type="file" id="upload_file" name="bill-images[]" >
+  <input type="text" name="files-count" id="files-count">
+</div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Due Date</label>
+    <div class="col-sm-10">
+    <input type="date" class="form-control" id="due-date">
+    </div>
+ </div> 
+ <div class="form-group">
+  <div class="form-check">
+   <input class="form-check-input" type="checkbox" id="gridCheck1">
+   <label class="form-check-label" for="gridCheck1">
+    Notified Admin
+   </label>
+   </div>
+</div>
+       
+      </div>
+      <div class="modal-footer" style="border-top:unset;">
+        <button type="button" id="save-bill-btn" class="next-btn btn btn-block btn-outline-primary" data-dismiss="modal" onclick="addtask(this)">SAVE</button>
+      </div>
+    
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="confirm-submit-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:unset;">
+        <!--<h5 class="modal-title" id="exampleModalLongTitle"></h5>-->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <h4 class="confirm-question">Are you sure want to submit ?</h4>
+       <div class="btn-row row">
+           <div class="mob-view col-md-6">
+              <button type="button" class="yes-btn btn btn-block btn-outline-primary" onclick="tasklistsubmit()" id="cnf-yes-btn">YES</button> 
+           </div>
+           <div class="mob-view col-md-6">
+              <button type="button" class="no-btn-btn btn btn-block btn-primary" data-dismiss="modal">NO</button> 
+           </div>
+       </div>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-primary">NO</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="yes-no-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:unset;">
+        <!--<h5 class="modal-title" id="exampleModalLongTitle"></h5>-->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <input type="hidden" id="taskidtemp" name="taskidtemp" value="">
+        <input type="hidden" id="taskduetemp" name="taskduetemp" value="">
+        
+       <h4 class="confirm-question"></h4>
+       <div class="btn-row row">
+           <div class="mob-view col-md-6">
+              <button type="button" class="yes-btn btn btn-block btn-outline-primary" data-dismiss="modal" id="yes-btn">YES</button> 
+           </div>
+           <div class="mob-view col-md-6">
+              <button type="button" class="no-btn btn btn-block btn-primary" id="tempbuttontaskka" name="tempbuttontaskka" data-toggle="modal" data-taskidmain="" data-taskduemain="" data-target="#add-bill">NO</button> 
+           </div>
+       </div>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-primary">NO</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+
+<!--- Multi Step form script -->{% block extrahead %}
+<script>
+ 
+    function openModal(){
+        $("#confirm-submit-modal").modal('show');
+    }
+
+$(document).ready(function(){
+$('#yes-no-modal').on('show.bs.modal', function(e) {
+ 
+  $(e.currentTarget).find('button[name="tempbuttontaskka"]').removeAttr("data-taskidmain");
+    $(e.currentTarget).find('button[name="tempbuttontaskka"]').removeAttr("data-taskduemain");
+    var task_ID = $(e.relatedTarget).attr('data-taskid');
+    var whatquestion = $(e.relatedTarget).attr('data-question');
+    var taskdue = $(e.relatedTarget).attr('data-taskdue');
+
+    $(e.currentTarget).find('input[name="taskidtemp"]').val(task_ID);
+    $(e.currentTarget).find('input[name="taskduetemp"]').val(taskdue);
+    $(e.currentTarget).find('h4[class="confirm-question"]').text(whatquestion)
+    
+    $(e.currentTarget).find('button[name="tempbuttontaskka"]').attr("data-taskidmain",task_ID);
+    $(e.currentTarget).find('button[name="tempbuttontaskka"]').attr("data-taskduemain",taskdue);
+});
+
+$('#add-bill').on('show.bs.modal', function(e1) {
+  
+  //$('#temptaskdetailform')[0].reset();
+ 
+  task_IDTemp =$('#tempbuttontaskka').attr('data-taskidmain');
+  
+ var taskdueTemp = $('#tempbuttontaskka').attr('data-taskduemain');
+ $(e1.currentTarget).find('input[name="finaltaskid"]').val('');
+ $(e1.currentTarget).find('input[name="finaltaskid"]').val(task_IDTemp);
+ 
+});
+
+
+});
+			
+			
+</script>
+<script>
+  var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+var taskArray = [];
+function addtask(){
+  var taskfollowup = 0;
+  if(document.getElementById("gridCheck1").checked){
+      taskfollowup = 1;
+  }
+  var temparray = document.getElementById("upload_file").value;
+  
+let task = {"visit_id":"{{visdata.id}}",
+"taskid":document.getElementById("finaltaskid").value,
+"amount":document.getElementById("finaltaskamount").value,
+    "remarks":document.getElementById("finaltaskremark").value,
+    "due-date":document.getElementById("due-date").value,
+    "gridCheck1":taskfollowup,
+    "files":temparray
+};  
+taskArray.push(task);
+
+//console.log("Task "+JSON.stringify(taskArray));
+
+}
+function tasklistsubmit(){
+
+var result = JSON.stringify(taskArray);
+console.log(result); 
+$.ajax({
+    "url": "{% url 'savePendingTasks' %}",
+    "type": "POST",
+    "data": {"maindata1":result },
+    "headers": { "X-CSRFToken": '{{csrf_token}}' },
+    success:function(datamain){
+          alert(datamain);
+          if(datamain=="Success"){
+            alert("Task Completed Successfully");
+            window.close();
+          }else{
+           
+             alert(datamain); 
+          }
+          
+      }
+});
+
+
+}
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "FINISH";
+    document.getElementById("nextBtn").setAttribute('onclick','openModal()');
+  } else {
+    document.getElementById("nextBtn").innerHTML = "NEXT";
+  }
+  //... and run a function that will display the correct step indicator:
+  //fixStepIndicator(n)
+}
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  //if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  //console.log(currentTab);
+  {% for cat in categs %}
+  if(currentTab == {{ forloop.counter0 }}){
+      $("#currenttabno").text("0{{ forloop.counter0|add:1}}");
+      //$(".arrow-icon").attr("onclick", "goBack();")
+      {% if forloop.first %}
+      $("#abc").attr("onclick", "goBack();"); 
+      {% else %}
+      $("#abc").attr("onclick", "nextPrev(-1);"); 
+      {% endif %}
+     $(".header-title").text("{{cat.categName}}");
+  }
+  {% endfor %}
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    location.href = 'shravancare_icare_partner_visit_index.html';
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+//var text_val = $('.tab').children('#tabno').val();
+  //console.log(text_val);
+
+$(".no-btn").click(function(){
+    $('#yes-no-modal').modal('hide')
+   $('#add-bill').modal();
+});
+
+</script>
+<script>
+//Orange-color
+    $("#save-bill-btn").click(function(){
+        $(".input-assumpte").addClass("change-color");
+        $(".input-assumpte").prop("checked",true);
+         $("#i-icon").show();
+        //$(".input-assumpte").attr("disabled",true);
+    });
+    // Green color
+    $("#yes-btn").click(function(){
+        $(".input-assumpte").prop("checked",true);
+    });
+</script>
+{% endblock %}
+<script>
+  $(document).on('change','#upload_file', function(){
+      var names = [];
+      var length = $(this).get(0).files.length;
+        for (var i = 0; i < $(this).get(0).files.length; ++i) {
+            names.push($(this).get(0).files[i].name);
+        }
+        // $("input[name=file]").val(names);
+      /*if(length>2){*/
+        var fileName = names.join(', ');
+        if(length > 1){$(this).closest('.form-group').find('#files-count').attr("value",length+" files selected");}
+        else{$(this).closest('.form-group').find('#files-count').attr("value",length+" file selected");}
+      /*}
+      else{
+        $(this).closest('.form-group').find('.form-control').attr("value",names);
+      }*/
+   });
+</script>
+<script>
+  var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today = yyyy + '-' + mm + '-' + dd;
+//console.log(today);
+//document.getElementById('frmdate').value = today;
+$("#due-date").val(today);
+$("#due-date").attr('min', today);
+function goBack() {
+  window.history.back();
+}
+</script>
+  </body>
+  </html>

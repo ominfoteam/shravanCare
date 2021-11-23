@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+ {% include "shravanmanagemet/header.html" %}
+   <style>
+       .direct-chat-img{
+           border-radius:0;
+           width:100px;
+           height:auto;
+       }
+   </style>
+<body class="hold-transition sidebar-mini layout-fixed">
+   
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+    <div class="content-wrapper">
+
+  <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Landing Part Grid </h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="">Home</a></li>
+              <li class="breadcrumb-item active">Landing Part Grid</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+   <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+	
+            
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                  <div class="col-md-3"><a href="{% url 'addSlider' %}"><button type="button" class="btn btn-block btn-primary" ><i class="glyphicon  glyphicon-plus"></i>   New Landing Part</button></a>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+<table id="landing-grid" class="table table-bordered table-striped">
+<thead>
+                     <tr>
+                       
+                        <th>Image</th>
+                        <th>Position</th>
+                        
+                        <th>Action</th>
+                      </tr>
+                  </thead>
+<tbody>
+  {% for slider in sliders %}
+  <tr><td><img src="static{{ slider.sliderimage }}" class="direct-chat-img" alt="User Image"></td>
+    <td class="hide-mobile">{{slider.position}}</td>
+    <td> <div class="btn-group">
+                         
+      <a href="{% url 'viewSlider' slider.id %}"><button type="button" class="btn btn-bg btn-primary" s><i class="fa fa-eye" data-toggle="tooltip" data-placement="auto" title="View"></i></button></a>
+  
+      <a href="{% url 'editSlider' slider.id %}"><button type="button" class="btn  btn-warning" ><i class="fa fa-edit" data-toggle="tooltip" data-placement="auto" title="Edit"></i></button></a>
+      <a href="{% url 'deleteSlider' slider.id %}"><button type="button" class="btn  btn-danger"><i class="fa fa-ban" data-toggle="tooltip" data-placement="auto" title="Delete"></i></button></a>
+
+      </div></td>
+   
+
+  </tr>
+{% endfor %}
+  
+               
+                     
+                  </tbody>
+                
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+     <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+  <!-- /.content-wrapper -->
+  {% include "shravanmanagemet/footer.html" %}
+   <script>
+       $('#landing-grid').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+   </script>
+	</body>
+</html>

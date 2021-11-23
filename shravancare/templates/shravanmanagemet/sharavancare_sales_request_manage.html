@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+  
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+   <div class="content-wrapper">
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Sales Request</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="shravancare_dashboard_frame.html">Home</a></li>
+              <li class="breadcrumb-item active">Sales Request</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  <form action="" method="POST" name="state-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Sales Request</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xs-4">
+                    <div class="form-group">
+                        <label for="customerName">Ticket Number</label>
+                        <input type="text" class="form-control" name="cust_ticket_no" id="cust_ticket_no"  placeholder="Ticket Number" value="{{salesreq.ticketno}}" disabled >
+                    </div>
+                </div>
+               
+                <div class="col-lg-4 col-md-4 col-xs-4">
+      <div class="form-group">
+         <label for="customerName">Name</label>
+                <input type="text" class="form-control" name="sales_custname" id="sales_custname"  placeholder="Name" value="{{salesreq.custname}}"  disabled>
+    </div>
+</div>
+            </div>
+            <div class="row">
+          
+<div class="col-lg-6 col-md-6 col-xs-6">
+     <div class="form-group">
+                <label for="customerName">Email Id</label>
+                 <input type="email" class="form-control" name="custsupport_email" id="custsupport_email"  placeholder="Email Id" value="{{salesreq.custemail}}"  disabled>
+    </div>  
+</div>
+<div class="col-lg-6 col-md-6 col-xs-6">
+     <div class="form-group">
+                <label for="customerName">Mobile Number</label>
+                 <input type="text" class="form-control" name="custsupport_mob" id="custsupport_mob"  placeholder="Mobile Number" value="{{salesreq.custmobile}}"  disabled>
+    </div>  
+</div>
+</div>
+<div class="row">
+
+<div class="col-lg-6 col-md-6 col-xs-6">
+     <div class="form-group">
+                <label for="customerName">Message</label>
+                <textarea class="form-control" name="custsupport_msg" id="cust_supportmsg" rows="3" disabled>{{salesreq.query_description}}</textarea>
+              </div>
+    </div>  
+    <div class="col-lg-6 col-md-6 col-xs-6">
+     <div class="form-group">
+                <label for="customerName">User Comment</label>
+                <textarea class="form-control" name="user-comment" {{view}} id="user-comment" rows="3" >{{salesreq.user_description}}</textarea>
+              </div>
+    </div>  
+</div>
+<!--<div class="row">
+<div class="col-lg-12 col-md-12 col-xs-12">
+     <div class="form-group">
+                <label for="customerName">User Comment</label>
+                <textarea class="form-control" name="user_comment" id="user_comment" rows="3"></textarea>
+              </div>
+    </div>   
+</div>-->
+<div class="row">
+<div class="col-lg-6 col-md-6 col-xs-6">
+     <div class="form-group">
+                <label for="customerName">Status</label>
+               <select name="cust_salesstatus" id="cust_salesstatus" {{view}} class="form-control custom-select" required> 
+                 <option value="" disabled>SELECT STATUS</option>
+              
+        <option value="NOT ATTENDED" {% if salesreq.querystatus == 'NOT ATTENDED' %} selected {% endif %}>Not Attended</option>
+        <option value="IN PROCESS" {% if salesreq.querystatus == 'IN PROCESS' %} selected {% endif %}>In Process</option>
+        <option value="CLOSE" {% if salesreq.querystatus == 'CLOSE' %} selected {% endif %}>CLOSE</option>
+        </select>
+              </div>
+    </div>   
+</div>
+
+
+<div class="box-footer">
+               
+          <div class="row">
+             
+                              <div class="col-md-3">
+          <div class="form-group">
+            <button type="submit" id="savebutton" {{view}} name="savebutton" class="btn btn-block btn-primary">Submit</button>
+          </div>
+          </div>            <div class="col-md-3">
+          <div class="form-group">
+         <a href="{% url 'gridSalesRequest' %}" >  <button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+          </div>
+        </div>
+       
+        </div>  </div>
+
+    </div>
+        </div>
+        </div>
+        </section>
+        </form>
+ </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+ 
+  {% include "shravanmanagemet/footer.html" %}
+
+	</body>
+</html>

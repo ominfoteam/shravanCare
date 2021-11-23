@@ -1,0 +1,302 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Shravancare</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="{% static 'css/slick.css' %}">-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<style>
+  .container{
+      max-width:600px;
+      padding-left: 0;
+    padding-right: 0;
+    overflow-x: hidden !important;
+  } 
+  body {
+    font-family: 'Poppins', sans-serif;
+    background:#F9F9F9;
+}
+.card{
+    border-bottom:0;
+    border-left:unset;
+    border-right:unset;
+    border-top:0;
+}
+.card-body{
+    background:#F9F9F9;
+}
+  .card-header{
+      background:#00529C;
+      display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height:70px;
+    border-radius: 0 !important;
+  }
+  .header-title{
+      font-size:18px;
+      color:#fff;
+      margin-bottom: 0;
+    padding-left: 10px;
+  }
+  .phone-icon{
+      color:#fff;
+  }
+  .icare-name-block{
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px 10px;
+    margin: 5px 0;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 19%), 0 1px 3px rgb(0 0 0 / 23%);
+  }
+  .icare-partner-name{
+      font-size:16px;
+      color:#00529C;
+  }
+  .icare-name{
+      color:#646464;
+      font-size:14px;
+      margin-bottom:0;
+  }
+  .logo{
+      max-width:100%;
+      height:auto;
+      width: 60px;
+    float: right;
+  }
+  .mob-view{
+     width:50%; 
+  }
+  .visit-title{
+      font-size:20px;
+      font-weight:600;
+      color:#00529C;
+      margin-bottom: 30px;
+  }
+  .visit-title:after {
+    content: '';
+    height: 6px;
+    background: #00529c;
+    border-radius: 5px;
+    display: block;
+    width: 13%;
+    position: absolute;
+}
+  .details-section{
+      margin-top:10px;
+  }
+  .visit-block{
+     border:0;
+    background: #EEF2F5;
+    padding: 20px 15px;
+    margin: 5px 0;
+  }
+  .visit-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+  }
+  .dot-icon{
+      font-size: 10px;
+    color: #00529c;
+  }
+  .visit-detail-title{
+      color:#000;
+      font-weight:500;
+      padding-left:10px;
+  }
+  
+  .btn-section{
+      margin-top:20px;
+  }
+  .det-btn{
+      border-color:#00529C;
+      color:#00529C;
+  }
+  .det-btn:hover{
+      color:#fff;
+      background:#00529C;
+      border-color:#00529C;
+  }
+  .det-btn:focus{
+      box-shadow:none;
+  }
+  .start-btn{
+      background:#00529C;
+      color:#fff;
+      border-color:#00529C;
+  }
+   .start-btn:hover{
+      color:#00529C;
+      background:#fff;
+      border-color:#00529C;
+  }
+  .start-btn:focus{
+      box-shadow:none;
+  }
+  .mobile-logo{
+      max-width:100%;
+      height:auto;
+      display:block;
+      width:50%;
+      margin-left:auto;
+      margin-right:auto;
+  }
+  .logo-section {
+    margin-top: 30px;
+}
+.modal-title{
+    color:#00529C;
+}
+</style>
+</head>
+<body>
+    <section class="visit-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+  <div class="card-header">
+    <h4 class="header-title">Client Visit</h4>
+    <a href="tel:9876543210"><i class=" phone-icon fas fa-phone-alt"></i></a>
+    
+  </div>
+  <div class="card-body">
+    <div class="icare-name-block">
+        <div class="row">
+        <div class="mob-view col-md-6">
+            <h4 class="icare-partner-name">Hi, {{visdata.icare_id.user_profile.name}}</h4>
+        <h5 class="icare-name">iCare Partner</h5>
+        </div>
+        <div class="mob-view col-md-6">
+           <img src="{% static 'img/Shravancare-Square-Logo.png' %}" class="logo" alt="shravancare-logo"> 
+        </div>
+        </div>
+        
+    </div>
+    <div class="details-section">
+    <div class="icare-name-block" style="padding:15px 15px;">
+        <h4 class="visit-title">Visit Details</h4>
+        <div class="visit-block">
+           <ul class="visit-list">
+               <li> <i class="dot-icon fas fa-circle"></i><span class="visit-detail-title">Visit Number: </span><span class="visit-content">{{visdata.id}}</span></li>
+           </ul>
+        </div>
+        <div class="visit-block">
+           <ul class="visit-list">
+               <li> <i class="dot-icon fas fa-circle"></i><span class="visit-detail-title">Date: </span><span class="visit-content">{{visdata.visitdate}}</span></li>
+           </ul>
+        </div>
+        <div class="visit-block">
+           <ul class="visit-list">
+               <li> <i class="dot-icon fas fa-circle"></i><span class="visit-detail-title">Time: </span><span class="visit-content">{{visdata.slot_id.starttime}}</span></li>
+           </ul>
+        </div>
+        <div class="visit-block">
+           <ul class="visit-list">
+               <li> <i class="dot-icon fas fa-circle"></i><span class="visit-detail-title">Clients: </span><span class="visit-content">{{eldername}}</span></li>
+           </ul>
+        </div>
+        <div class="btn-section">
+            <div class="row">
+                <div class="mob-view col-md-6">
+                    <button type="button" class="det-btn btn-block btn btn-outline-primary" data-toggle="modal" data-target="#client-details">DETAILS</button>
+                </div>
+                <div class="mob-view col-md-6">
+                 <a href="{% url 'icaretasks' visdata.id %}">   <button type="button" class="start-btn btn-block btn btn-primary" >START</button></a>
+                    <button type="button" class="start-btn btn-block btn btn-primary" style="display:none;" onclick="location.href='shravancare_icare_partner_end_visit.html';">VIEW</button>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    </div>
+    <div class="logo-section">
+        <img src="{% static 'img/mobile-logo.png' %}" class="mobile-logo" alt="shravancare-logo"> 
+    </div>
+    
+  </div>
+</div>
+            </div>
+        </div>
+    </div>
+    </section>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <div class="modal fade" id="client-details" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:unset;">
+        <h5 class="modal-title" id="exampleModalLongTitle">Client Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-borderless">
+  <!--<thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>-->
+  <tbody>
+    <tr>
+      <td>Client Name:</td>
+      <td>{{eldername}}</td>
+    </tr>
+    <tr>
+      <td>Visit On:</td>
+      <td>{{visdata.visitdate}}</td>
+    </tr>
+     <tr>
+      <td>In Time:</td>
+      <td>{{visdata.slot_id.starttime}}</td>
+    </tr>
+    <tr>
+      <td>Out Time:</td>
+      <td>{{visdata.slot_id.endtime}}</td>
+    </tr>
+    <tr>
+      <td>Contact:</td>
+      <td>{{elderdetail.mobile}}</td>
+    </tr>
+    <tr>
+      <td>Address:</td>
+      <td>{{elderdetail.address}},{{elderdetail.city.city_name}},{{elderdetail.pincode.pincode_no}}.</td>
+    </tr>
+    <tr>
+      <td>Instruction:</td>
+      <td>{{elderdetail.description}} </td>
+    </tr>
+  </tbody>
+</table>
+<div class="close-modal">
+    <div class="row">
+        <div class="col-md-12">
+            <button type="button" class="det-btn btn btn-block btn-outline-primary" data-dismiss="modal">OKAY</button>
+        </div>
+    </div>
+</div>
+      </div>
+      <!--<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>-->
+    </div>
+  </div>
+</div>
+    </body>
+    </html>

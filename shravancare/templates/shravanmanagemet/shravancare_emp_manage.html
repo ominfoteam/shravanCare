@@ -1,0 +1,570 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include "shravanmanagemet/header.html" %}
+ <style>
+     .text-danger{
+         color:red;
+     }
+     .vaccine-row {
+    margin-top: 15px;
+}
+ </style>  
+<body class="hold-transition sidebar-mini layout-fixed">
+  
+<div class="wrapper">
+{% include "shravanmanagemet/navbar.html" %}
+    <div class="content-wrapper">
+
+
+                
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Employee Form</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Employee Form</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h3 class="card-title">Employee</h3>
+
+          
+          </div>
+          <!-- /.card-header -->
+         <form action="" method="POST" enctype="multipart/form-data">  
+          {% csrf_token %}
+            <div class="card-body" style="display: block;">
+                 <div class="row">
+               
+                <div class="col-lg-6 col-md-6 col-xs-6">
+              <div class="form-group">
+                <label for="inputName">Employee Username</label>
+                <input type="text" name="uname"  id="uname" disabled class="form-control" placeholder="Employee Username" value="{{empdetail.user.username}}" >
+        
+              </div>
+              </div>
+               
+                <div class="col-lg-6 col-md-6 col-xs-6 half-inp">
+              <div class="form-group">
+                <label for="inputName">Employee Name</label>
+                <input type="text" name="ename"   {{view}}  id="ename" class="form-control" placeholder="Employee Name" required value="{{empdetail.name}}">
+        
+              </div>
+              </div>
+             
+
+         </div>
+
+
+
+  <div class="row">
+               
+                <div class="col-lg-6 col-md-6 col-xs-6">
+               <div class="form-group">
+                <label for="inputDescription">Mobile Number</label>
+                <input type="text" name="mob"  {{view}}  id="mob"  maxlength="10"  onkeypress="return isNumber(event)" onfocusout="checkmob(this)" class="form-control" placeholder="Mobile Number" required  value="{{empdetail.mobile}}">
+                <small id="ContactnoHelp" class="text-danger"></small> 
+         
+         </div>
+              </div>
+               
+             <div class="col-lg-6 col-md-6 col-xs-6">
+         <div class="form-group">
+            
+                <label for="inputDescription">Email ID</label>
+                <input type="email" name="emailid"  {{view}}  id="emailid"  onfocusout=checkEmail(this)  class="form-control" placeholder="Email" required value="{{empdetail.user.email}}">
+                <small id="EmailHelp" class="text-danger"></small>      
+         </div>
+         </div>
+         </div>
+             
+
+       
+                
+                
+                
+                
+                
+
+  <div class="row">
+            
+               
+             <div class="col-lg-6 col-md-6 col-xs-6">
+        <div class="form-group">
+                <label for="inputDescription">Address (optional)</label>
+                <textarea class="form-control" name="addr"  {{view}}  id="addr"    placeholder="Address">{{empdetail.address}}</textarea>
+         
+         
+         </div>
+         </div>
+         </div>
+             
+
+        
+  <div class="row">
+               
+                <div class="col-lg-3 col-md-3 col-xs-3">
+              <div class="form-group">
+                <label for="inputStatus">Country</label>
+                <select class="form-control custom-select" name="country"  {{view}}  id="country" required>
+           <option value>SELECT COUNTRY</option>         
+           {% for countries in country %}        
+           <option value="{{countries.id}}" {% if countries.id == empdetail.country.id %} selected="selected" {% endif %} >{{countries.country_name}}</option>
+           {% endfor %}
+          </select>
+              </div>
+              </div>
+              
+               <div class="col-lg-3 col-md-3 col-xs-3 half-inp">
+              <div class="form-group">
+                <label for="inputStatus">State</label>
+                <select class="form-control custom-select" name="state"  {{view}}  id="state" required>
+                  {% if state %}     
+           {% for states in state %}        
+           <option value="{{states.id}}" {% if states.id == empdetail.state.id %} selected="selected" {% endif %} >{{states.state_name}}</option>
+           {% endfor %}
+           {% else%}
+           <option value>SELECT COUNTRY</option>         
+  {% endif %}  
+          </select>
+              </div>
+              </div>
+              
+              <div class="col-lg-3 col-md-3 col-xs-3 half-inp">
+               <div class="form-group">
+                <label for="inputStatus">City</label>
+                <select class="form-control custom-select" name="city"  {{view}}  id="city" required>
+                  {% if city %}    
+           {% for cities in city %}        
+           <option value="{{cities.id}}" {% if cities.id == empdetail.city.id %} selected="selected" {% endif %} >{{cities.city_name}}</option>
+           {% endfor %}
+           {% else%}
+                  <option value>SELECT COUNTRY</option>         
+         {% endif %}  
+          </select>
+              </div>
+              </div>
+              
+              <div class="col-lg-3 col-md-3 col-xs-3 half-inp">
+            <div class="form-group">
+                <label for="inputStatus">Pincode</label>
+                <select class="form-control custom-select" name="pincode"  {{view}}  id="pincode" required>
+                  {% if pincode %}
+                      
+          
+           {% for pincodes in pincode %}        
+         <option value="{{pincodes.id}}" {% if pincodes.id == empdetail.pinocde.id %} selected="selected" {% endif %} >{{pincodes.pincode_no}}</option>
+         {% endfor %}
+         {% else%}
+                  <option value>SELECT COUNTRY</option>         
+         {% endif %}  
+          </select>
+              </div>
+              </div>
+               
+         
+         </div>
+             
+
+           <div class="row">
+						<div class="col-lg-3 col-md-3 col-xs-3">		
+         <div class="form-group">
+                <label for="inputDescription">Date of Birth</label>
+                <input type="date" class="form-control"  name="dob"  {{view}}  id="dob" required value="{{empdetail.dob}}">
+         
+         </div>
+         </div>
+         <div class="col-lg-3 col-md-3 col-xs-3">
+         <div class="form-group">
+                <label for="inputStatus">Gender</label>
+                <select class="form-control custom-select" name="gender"  {{view}}  id="gender" required >
+                  <option value>SELECT GENDER</option>         
+          <option value="Male" {% if empdetail.gender == 'Male' %} selected {% endif %}>Male</option>
+<option value="Female" {% if empdetail.gender == 'Female' %} selected {% endif %}>Female</option>
+          </select>
+              </div>
+              </div>
+              <div class="col-md-3 col-xs-3 col-lg-3">
+            <div class="form-group">
+                <label for="inputStatus">Designation</label>
+                <select class="form-control custom-select" name="desig"  {{view}}  id="desig" required>
+                  <option value>SELECT DESIGNATION</option>         
+          <option value="MANAGEMENT" {% if empdetail.user.is_management %} selected {% endif %}>Management</option>
+<option value="ICARE" {% if empdetail.user.is_icare %} selected {% endif %}>Icare Partner</option>
+          </select>
+              </div>
+        </div>
+		</div>
+    <!--<div class="row">
+        
+    </div> -->   
+    <div class="row">
+        <div class="col-md-6 col-xs-6 col-lg-6">
+            <div class="form-group" style="display:none;" id="desc-field">
+                <label for="inputDescription">Description</label>
+                <textarea class="form-control" name="desc"  {{view}}  id="desc"    placeholder="Description" >{{empdetail.description}}</textarea>
+              </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-3 col-lg-3">
+            <div class="form-group" style="display:none;" id="id-proof-type-field">
+                <label for="inputDescription">Id Proof Name</label>
+                <input type="text" name="idproof-type"  {{view}}  id="idproof-type" class="form-control" placeholder="Id Proof Name" value="{{icare1.id_name}}" >
+              </div>
+              <div class="form-group" style="display:none;" id="id-file-field">
+         
+			  <div class="profile-header-img">
+				   <img src="{% if icare1 %}/static{{icare1.imgurl}}{% else %}{% static 'img/idproof.png' %}{% endif %}" id="changedp" alt="Profile Picture" style="width: 100px;">
+		              
+				</div>
+                <p>
+				Choose Photo: <input type="file" name="upFile"  {{view}}  id="upFile" >
+   
+              
+				</p>
+             
+        </div>
+        </div>
+        <div class="col-md-3 col-xs-3 col-lg-3">
+            <div class="form-group" style="display:none;" id="id-proof-type-field1">
+                <label for="inputDescription">Id Proof Name(optional)</label>
+                <input type="text" name="idproof-type1"  {{view}}  id="idproof-type1" class="form-control" placeholder="Id Proof Name" value="{{icare2.id_name}}"  >
+              </div>
+              <div class="form-group" style="display:none;" id="id-file-field1">
+         
+			  <div class="profile-header-img">
+				   <img src="{% if icare2 %}/static{{icare2.imgurl}}{% else %}{% static 'img/idproof.png' %}{% endif %}" id="changedp1" alt="Profile Picture" style="width: 100px;">
+		              
+				</div>
+                <p>
+				Choose Photo: <input type="file" name="upFile1"  {{view}}  id="upFile1">
+   
+              
+				</p>
+             
+        </div>
+        </div>
+        <div class="col-md-3 col-xs-3 col-lg-3">
+            <div class="form-group" style="display:none;" id="id-proof-type-field2">
+                <label for="inputDescription">Id Proof Name(optional)</label>
+                <input type="text" name="idproof-type2"  {{view}}  id="idproof-type2" class="form-control" placeholder="Id Proof Name" value="{{icare3.id_name}}" >
+              </div>
+              <div class="form-group" style="display:none;" id="id-file-field2">
+         
+			  <div class="profile-header-img">
+				   <img src="{% if icare3 %}/static{{icare3.imgurl}}{% else %}{% static 'img/idproof.png' %}{% endif %}" id="changedp2" alt="Profile Picture" style="width: 100px;">
+		              
+				</div>
+                <p>
+				Choose Photo: <input type="file" name="upFile2"  {{view}}  id="upFile2">
+   
+              
+				</p>
+             
+        </div>
+        </div>
+    </div>
+  
+    <div class="vaccine-row row">
+        <div class="col-md-3 col-xs-3 col-lg-3">
+            <div class="form-group" style="display:none;" id="vaccination-cert">
+         
+			  <div class="profile-header-img">
+				   <img src="{% if vaccine %}/static{{vaccine.imgurl}}{% else %}{% static 'img/certified-vaccine.png' %}{% endif %}" id="changedp3" alt="Profile Picture" style="width: 100px;">
+		              
+				</div>
+                <p>
+				<b>Upload Vaccination Certificate:</b> <input type="file" name="upFile3"  {{view}}  id="upFile3" >
+   
+              
+				</p>
+             
+        </div>
+        </div>
+    </div>
+    <div class="row">
+       
+              
+             
+              <div class="col-lg-3 col-md-3 col-xs-3">
+               <div class="form-group">
+                <label for="inputStatus">Is Active?</label>
+                <select class="form-control custom-select" name="isactive"  {{view}}  id="isactive" >
+          <option value="Yes" {% if empdetail.user.is_active == 1 %} selected {% endif %} >Yes</option>
+          <option value="No" {% if empdetail.user.is_active == 0 %} selected {% endif %} >No</option>
+          </select>
+              </div>
+              </div>
+    </div>
+              
+            
+                <!----------------------------------------->
+              
+       
+         
+		
+		
+          
+               <div class="box-footer">
+                   
+              <div class="row">
+                 
+                      
+            <div class="col-md-3">
+            	<div class="form-group">
+                <button type="submit" {{view}} id="savebutton" name="savebutton" class="btn btn-block btn-primary" >Submit</button>
+              </div>
+              </div>
+            <div class="col-md-3">
+            	<div class="form-group">
+                <a href="{% url 'gridEmployee' %}"><button type="button" class="btn btn-block btn-secondary" >Exit</button></a>
+                </div>
+            </div>
+           
+            </div>  </div> 
+            </div>
+            </form>    
+         
+          <!-- /.card-body -->
+         
+        </div>
+        </div>
+        </section>
+ 
+  </div>
+ {% include "shravanmanagemet/copyright.html" %}
+ </div>
+  <!-- /.content-wrapper -->
+  {% include "shravanmanagemet/footer.html" %}
+  {% if isicare %}
+<script>
+ $("#desc-field").show();
+             $("#id-proof-type-field").show();
+             $("#id-file-field").show();
+             $("#id-proof-type-field1").show();
+             $("#id-file-field1").show();
+             $("#id-proof-type-field2").show();
+             $("#id-file-field2").show();
+              $("#vaccination-cert").show();
+
+</script>
+  {% endif %}
+
+<script>
+    $("#desig").change(function () {
+         if ($(this).val() == "ICARE") {
+             $("#desc-field").show();
+             $("#id-proof-type-field").show();
+             $("#id-file-field").show();
+             $("#id-proof-type-field1").show();
+             $("#id-file-field1").show();
+             $("#id-proof-type-field2").show();
+             $("#id-file-field2").show();
+              $("#vaccination-cert").show();
+             
+         }
+         else{
+            $("#desc-field").hide();
+             $("#id-proof-type-field").hide();
+             $("#id-file-field").hide(); 
+             $("#id-proof-type-field1").hide();
+             $("#id-file-field1").hide(); 
+             $("#id-proof-type-field2").hide();
+             $("#id-file-field2").hide(); 
+              $("#vaccination-cert").hide();
+         }
+    });
+    function checkmob(obj){
+    if(obj.value != ""){
+     var phoneno = /^\d{10}$/;
+    
+  if(obj.value.match(phoneno))
+   {
+       // console.log("jj");
+      $(obj).removeClass("is-invalid"); 
+       $(obj).next().text("");
+      return true;
+        }
+      else
+        {
+           //  console.log("tt");
+       $(obj).addClass("is-invalid");      
+      
+        $(obj).next().text("Mobile No must be 10 digit long");
+        return false;
+        }
+}
+}
+function checkEmail(obj1){
+    if(obj1.value !=""){
+        var cemailid = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(obj1.value.match(cemailid))
+        {
+            $(obj1).removeClass("is-invalid"); 
+       $(obj1).next().text("");
+      return true;
+        }
+        else{
+           $(obj1).addClass("is-invalid");      
+      
+        $(obj1).next().text("Please enter a valid Email ID");
+        return false; 
+        }
+    }
+}
+function isNumber(evt) {
+  evt = (evt) ? evt : window.event;
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    return false;
+  }
+
+  return true;
+}
+</script>
+ <script>
+    function readURL(input) {
+    console.log("hit");
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#changedp').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#upFile").change(function(){
+    readURL(this);
+});
+function readURL1(input1) {
+    console.log("hit");
+    if (input1.files && input1.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#changedp1').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input1.files[0]);
+    }
+}
+
+$("#upFile1").change(function(){
+    readURL1(this);
+});
+function readURL2(input2) {
+    console.log("hit");
+    if (input2.files && input2.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#changedp2').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input2.files[0]);
+    }
+}
+
+$("#upFile2").change(function(){
+    readURL2(this);
+});
+function readURL3(input3) {
+    console.log("hit");
+    if (input3.files && input3.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#changedp3').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input3.files[0]);
+    }
+}
+
+$("#upFile3").change(function(){
+    readURL3(this);
+});
+
+
+</script>
+<script>
+  $("#country").change(function () {
+      const url = "{% url 'load_state' %}"
+      const countryId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'country_id': countryId   
+          },
+          success: function (data) {  
+              $("#state").html(data); 
+              var selectcity = $('#city');
+              selectcity.empty().append('<option value="">---Select State---</option>');
+var selectpincode = $('#pincode');
+selectpincode.empty().append('<option value="">---Select State---</option>');
+          }
+      });
+
+  });
+
+
+  $("#state").change(function () {
+      const url = "{% url 'load_city' %}"
+      const stateId = $(this).val();  
+
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'state_id': stateId   
+          },
+          success: function (data) {  
+              $("#city").html(data); 
+              var selectpincode = $('#pincode');
+selectpincode.empty().append('<option value="">---Select City---</option>');
+          }
+      });
+
+  });
+
+
+
+  $("#city").change(function () {
+      const url = "{% url 'load_pincodes' %}"
+      const cityId = $(this).val();  
+      //alert(cityId) 
+      $.ajax({                      
+          url: url,                   
+          data: {
+              'city_id': cityId  ,
+              'temp':cityId 
+              
+          },
+          success: function (data) {  
+              $("#pincode").html(data); 
+             
+          }
+      });
+
+  });
+</script>
+	</body>
+	</html>
