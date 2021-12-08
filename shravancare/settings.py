@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
+from .database import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'shravancare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 #if os.getenv("DATABASE_URL","") == "":
-DATABASES = {'default': {'ENGINE': 'django.db.backends.mysql', 'NAME': 'shravancare','USER': 'root','PASSWORD': 'Ominfo@server$1994','HOST': '165.22.217.236','PORT': '','OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},}}
+DATABASES = {'default': {'ENGINE': 'django.db.backends.mysql', 'NAME': 'shravancare','USER': 'root','PASSWORD': 'Ominfo@server$1994','HOST': 'localhost','PORT': '','OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},}}
 
 
 # Password validation
