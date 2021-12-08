@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'shravancare.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 if os.getenv("DATABASE_URL","") == "":
-    DATABASES = {
+    """DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql', 
             'NAME': 'shravancare',
@@ -89,7 +89,14 @@ if os.getenv("DATABASE_URL","") == "":
             'PORT': '',
             'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
         }
-    }
+    }"""
+    DATABASES = {
+   'default': {},
+   'mysite': {
+      'ENGINE': 'django.db.backends.sqlite3',
+      'NAME': os.path.join(BASE_DIR, 'db_mysite.sqlite3'),
+            }
+                }
 
 
 # Password validation
