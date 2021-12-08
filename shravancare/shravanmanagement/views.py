@@ -1186,6 +1186,8 @@ def customerLogin(request):
         return redirect('homePageDataBeforeLogin')
 
 
+
+
 def logout_frontend(request):
     logout(request)
     request.session.flush()
@@ -1579,6 +1581,12 @@ def updatePendingTask(request,pk):
     updatepending.taskstatus="Completed"
     updatepending.save()
     return redirect('shravanCareDashboard')
+
+
+def saveTempPendingTasks(request):
+    taskdata=PendingTasks.objects.create(taskid=request.POST['finaltaskid'])
+    #bill-images
+    
 
 
 

@@ -129,6 +129,8 @@ urlpatterns = [
     path('gridInvoice', views.gridInvoice, name="gridInvoice"),
     path('myProfile', views.myProfile, name="myProfile"),
     path('save_package', views.save_package, name="save_package"),
+    path('saveTempPendingTasks', views.saveTempPendingTasks, name="saveTempPendingTasks"),
+    
     path('shravanCareDashboard', views.shravanCareDashboard, name="shravanCareDashboard"),
     path('savePendingTasks', views.savePendingTasks, name="savePendingTasks"), 
     path('customerSupportCreate', views.customerSupportCreate, name="customerSupportCreate"), 

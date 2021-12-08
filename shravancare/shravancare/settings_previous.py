@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
+SECRET_KEY = 'django-insecure-+q=_c)li9l+t%e-xe9beyu_l7)r6te_91gzvq(de-61u(zxd3)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = True
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "*").split(",")
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL='shravanmanagement.CustomUser'
 
@@ -78,18 +77,18 @@ WSGI_APPLICATION = 'shravancare.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if os.getenv("DATABASE_URL","") == "":
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql', 
-            'NAME': 'shravancare',
-            'USER': 'root',
-            'PASSWORD': 'nigel@889818',
-            'HOST': '165.22.217.236',   # Or an IP Address that your DB is hosted on
-            'PORT': '',
-            'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'shravancare',
+        'USER': 'nigel',
+        'PASSWORD': 'nigel@889818',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
     }
+}
 
 
 # Password validation
