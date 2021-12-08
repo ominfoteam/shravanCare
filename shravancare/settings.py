@@ -78,18 +78,18 @@ WSGI_APPLICATION = 'shravancare.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if os.getenv("DATABASE_URL","") == "":
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql', 
-            'NAME': 'shravancare',
-            'USER': 'root',
-            'PASSWORD': 'Ominfo@server$1994',
-            'HOST': '165.22.217.236',   # Or an IP Address that your DB is hosted on
-            'PORT': '',
-            'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
-        }
+#if os.getenv("DATABASE_URL","") == "":
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'shravancare',
+        'USER': 'root',
+        'PASSWORD': 'Ominfo@server$1994',
+        'HOST': '165.22.217.236',   # Or an IP Address that your DB is hosted on
+        'PORT': '',
+        'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
     }
+}
 
 
 # Password validation
