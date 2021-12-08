@@ -84,7 +84,7 @@ if os.getenv("DATABASE_URL","") == "":
             'ENGINE': 'django.db.backends.mysql', 
             'NAME': 'shravancare',
             'USER': 'root',
-            'PASSWORD': 'nigel@889818',
+            'PASSWORD': 'Ominfo@server$1994',
             'HOST': '165.22.217.236',   # Or an IP Address that your DB is hosted on
             'PORT': '',
             'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
