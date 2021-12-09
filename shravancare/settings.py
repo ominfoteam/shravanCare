@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'shravancare.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if os.getenv("DATABASE_URL","") == "":
-    DATABASES = {
+#if os.getenv("DATABASE_URL","") == "":
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql', 
             'NAME': 'shravancare',
