@@ -85,11 +85,11 @@ if os.getenv("DATABASE_URL","") == "":
             'NAME': 'shravancare',
             'USER': 'root',
             'PASSWORD': 'SC@server$1994pass',
-            'HOST': '143.110.189.214',   # Or an IP Address that your DB is hosted on
+            'HOST': '143.110.189.214',
             'PORT': '',
             'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
-        }
-    }
+                    }
+                }
 
 
 # Password validation
