@@ -87,7 +87,7 @@ if os.getenv("DATABASE_URL","") == "":
                 'PASSWORD': 'SC@server$1994pass',
                 'HOST': '143.110.189.214',
                 'PORT': '',
-                'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"},
+                'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"}
             }
         }
 
