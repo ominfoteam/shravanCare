@@ -83,7 +83,7 @@ if os.getenv("DATABASE_URL","") == "":
         'default': {
             'ENGINE': 'django.db.backends.mysql', 
             'NAME': 'shravancare',
-            'USER': 'root',
+            'USER': 'root'
             'PASSWORD': 'SC@server$1994pass',
             'HOST': '143.110.189.214',   # Or an IP Address that your DB is hosted on
             'PORT': '',
