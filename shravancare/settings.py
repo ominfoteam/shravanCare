@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from django.core.management.utils import get_random_secret_key
+from .database import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,7 +85,7 @@ if os.getenv("DATABASE_URL","") == "":
                 'NAME': 'shravancare',
                 'USER': 'root',
                 'PASSWORD': 'SC@server$1994pass',
-                'HOST': 'localhost',
+                'HOST': '143.110.189.214',
                 'PORT': '',
                 'OPTION': {'init_command':"SET sql_mode='STRICT_TRANS_TABLE',"}
             }
